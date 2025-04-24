@@ -40,9 +40,6 @@ dependencies {
 
     // Development QOL
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
-
-    // if you would like to add integration with JEI, uncomment this line.
-//    modCompileOnly("mezz.jei:jei-$minecraft_version:$jei_version:api")
 }
 
 processResources {
@@ -63,8 +60,8 @@ processResources {
 loom {
     forge {
         mixinConfig(
-                "examplemod-common.mixins.json",
-                "examplemod.mixins.json"
+                "vscarmor-common.mixins.json",
+                "vscarmor.mixins.json"
         )
     }
 }

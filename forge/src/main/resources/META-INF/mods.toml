@@ -1,33 +1,33 @@
 modLoader = "javafml"
 loaderVersion = "[${forge_version},)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/kawaiicakes/VS2-CBC-Armor-Multiloader/issues"
+license = "MIT"
 
 [[mods]]
-modId = "examplemod"
+modId = "vscarmor"
 version = "${version}"
-displayName = "Example Mod"
-authors = "Me!"
+displayName = "VS2/CBC Armor Blocks"
+authors = "kawaiicakes, BlackBirdAntlion"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Elegant armor blocks designed for use with Create: Big Cannons & Valkyrien Skies. Texture assets lovingly made by https://x.com/BlackbirdieAnt
 '''
 logoFile = "icon.png"
 
-[[dependencies.examplemod]]
+[[dependencies.vscarmor]]
 modId = "forge"
 mandatory = true
 versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.vscarmor]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.vscarmor]]
 modId="create"
 mandatory=true
 versionRange="${create_version}"

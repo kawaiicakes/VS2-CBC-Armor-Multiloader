@@ -1,27 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "vscarmor",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "VS2/CBC Armor Blocks",
+  "description": "Elegant armor blocks designed for use with Create: Big Cannons & Valkyrien Skies. Texture assets lovingly made by https://x.com/BlackbirdieAnt",
   "authors": [
-    "Me!"
+    "kawaiicakes",
+    "BlackBirdAntlion"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/vs-create-armor",
+    "sources": "https://github.com/kawaiicakes/VS2-CBC-Armor-Multiloader"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "MIT",
+  "icon": "assets/vscarmor/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric"
+    ],
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "vscarmor.mixins.json",
+    "vscarmor-common.mixins.json"
   ],
   "depends": {
     "minecraft": "${minecraft_version}",
