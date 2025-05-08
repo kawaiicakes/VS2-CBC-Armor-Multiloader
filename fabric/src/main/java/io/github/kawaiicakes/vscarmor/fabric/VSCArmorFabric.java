@@ -11,6 +11,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+import java.util.function.Supplier;
+
 public class VSCArmorFabric implements ModInitializer, ClientModInitializer {
     @Override
     public void onInitialize() {
@@ -23,12 +25,12 @@ public class VSCArmorFabric implements ModInitializer, ClientModInitializer {
                 VSCArmor.NAME
         );
 
-        for (Pair<String, Block> pair : VSCArmorBlocks.BLOCKS) {
-            Registry.register(Registry.BLOCK, pair.first(), pair.second());
+        for (Pair<String, Supplier<Block>> pair : VSCArmorBlocks.BLOCKS) {
+            Registry.register(Registry.BLOCK, pair.first(), pair.second().get());
         }
 
-        for (Pair<String, Item> pair : VSCArmorItems.ITEMS) {
-            Registry.register(Registry.ITEM, pair.first(), pair.second());
+        for (Pair<String, Supplier<Item>> pair : VSCArmorItems.ITEMS) {
+            Registry.register(Registry.ITEM, pair.first(), pair.second().get());
         }
     }
 

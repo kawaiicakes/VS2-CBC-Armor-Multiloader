@@ -7,11 +7,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
 public class VSCArmorBlocks {
-	public static List<Pair<String, Block>> BLOCKS = new ArrayList<>();
+	public static List<Pair<String, Supplier<Block>>> BLOCKS = new ArrayList<>();
 
 	public static Pattern[] patterns() {
 		return new Pattern[] {
@@ -76,45 +77,45 @@ public class VSCArmorBlocks {
 		String name,
 		boolean hasWlVariants
 	) {
-		public List<Pair<String, Block>> generateBlocks() {
-			List<Pair<String, Block>> toReturn = new ArrayList<>();
+		public List<Pair<String, Supplier<Block>>> generateBlocks() {
+			List<Pair<String, Supplier<Block>>> toReturn = new ArrayList<>();
 
 			for (Grades grade : Grades.values()) {
-				toReturn.add(generateEntry(grade, "", grade.block()));
-				toReturn.add(generateEntry(grade, "_slab", grade.slab()));
-				toReturn.add(generateEntry(grade, "_vertical_slab", grade.vSlab()));
-				toReturn.add(generateEntry(grade, "_stairs", grade.stairs()));
-				toReturn.add(generateEntry(grade, "_vertical_stairs", grade.vStairs()));
-				toReturn.add(generateEntry(grade, "_fence", grade.fence()));
-				toReturn.add(generateEntry(grade, "_wall", grade.wall()));
-				toReturn.add(generateEntry(grade, "_porthole", grade.porthole()));
-				toReturn.add(generateEntry(grade, "_porthole_slab", grade.portholeSlab()));
-				toReturn.add(generateEntry(grade, "_porthole_vertical_slab", grade.portholeVSlab()));
-				toReturn.add(generateEntry(grade, "_vertical_window", grade.vWindow()));
-				toReturn.add(generateEntry(grade, "_vertical_window_slab", grade.vWindowSlab()));
-				toReturn.add(generateEntry(grade, "_vertical_window_vertical_slab", grade.vWindowVSlab()));
-				toReturn.add(generateEntry(grade, "_horizontal_window", grade.hWindow()));
-				toReturn.add(generateEntry(grade, "_horizontal_window_slab", grade.hWindowSlab()));
-				toReturn.add(generateEntry(grade, "_horizontal_window_vertical_slab", grade.hWindowVSlab()));
+				toReturn.add(generateEntry(grade, "", grade::block));
+				toReturn.add(generateEntry(grade, "_slab", grade::slab));
+				toReturn.add(generateEntry(grade, "_vertical_slab", grade::vSlab));
+				toReturn.add(generateEntry(grade, "_stairs", grade::stairs));
+				toReturn.add(generateEntry(grade, "_vertical_stairs", grade::vStairs));
+				toReturn.add(generateEntry(grade, "_fence", grade::fence));
+				toReturn.add(generateEntry(grade, "_wall", grade::wall));
+				toReturn.add(generateEntry(grade, "_porthole", grade::porthole));
+				toReturn.add(generateEntry(grade, "_porthole_slab", grade::portholeSlab));
+				toReturn.add(generateEntry(grade, "_porthole_vertical_slab", grade::portholeVSlab));
+				toReturn.add(generateEntry(grade, "_vertical_window", grade::vWindow));
+				toReturn.add(generateEntry(grade, "_vertical_window_slab", grade::vWindowSlab));
+				toReturn.add(generateEntry(grade, "_vertical_window_vertical_slab", grade::vWindowVSlab));
+				toReturn.add(generateEntry(grade, "_horizontal_window", grade::hWindow));
+				toReturn.add(generateEntry(grade, "_horizontal_window_slab", grade::hWindowSlab));
+				toReturn.add(generateEntry(grade, "_horizontal_window_vertical_slab", grade::hWindowVSlab));
 
 				if (!this.hasWlVariants) continue;
 
-				toReturn.add(generateWlEntry(grade, "", grade.block()));
-				toReturn.add(generateWlEntry(grade, "_slab", grade.slab()));
-				toReturn.add(generateWlEntry(grade, "_vertical_slab", grade.vSlab()));
-				toReturn.add(generateWlEntry(grade, "_stairs", grade.stairs()));
-				toReturn.add(generateWlEntry(grade, "_vertical_stairs", grade.vStairs()));
-				toReturn.add(generateWlEntry(grade, "_fence", grade.fence()));
-				toReturn.add(generateWlEntry(grade, "_wall", grade.wall()));
-				toReturn.add(generateWlEntry(grade, "_porthole", grade.porthole()));
-				toReturn.add(generateWlEntry(grade, "_porthole_slab", grade.portholeSlab()));
-				toReturn.add(generateWlEntry(grade, "_porthole_vertical_slab", grade.portholeVSlab()));
-				toReturn.add(generateWlEntry(grade, "_vertical_window", grade.vWindow()));
-				toReturn.add(generateWlEntry(grade, "_vertical_window_slab", grade.vWindowSlab()));
-				toReturn.add(generateWlEntry(grade, "_vertical_window_vertical_slab", grade.vWindowVSlab()));
-				toReturn.add(generateWlEntry(grade, "_horizontal_window", grade.hWindow()));
-				toReturn.add(generateWlEntry(grade, "_horizontal_window_slab", grade.hWindowSlab()));
-				toReturn.add(generateWlEntry(grade, "_horizontal_window_vertical_slab", grade.hWindowVSlab()));
+				toReturn.add(generateWlEntry(grade, "", grade::block));
+				toReturn.add(generateWlEntry(grade, "_slab", grade::slab));
+				toReturn.add(generateWlEntry(grade, "_vertical_slab", grade::vSlab));
+				toReturn.add(generateWlEntry(grade, "_stairs", grade::stairs));
+				toReturn.add(generateWlEntry(grade, "_vertical_stairs", grade::vStairs));
+				toReturn.add(generateWlEntry(grade, "_fence", grade::fence));
+				toReturn.add(generateWlEntry(grade, "_wall", grade::wall));
+				toReturn.add(generateWlEntry(grade, "_porthole", grade::porthole));
+				toReturn.add(generateWlEntry(grade, "_porthole_slab", grade::portholeSlab));
+				toReturn.add(generateWlEntry(grade, "_porthole_vertical_slab", grade::portholeVSlab));
+				toReturn.add(generateWlEntry(grade, "_vertical_window", grade::vWindow));
+				toReturn.add(generateWlEntry(grade, "_vertical_window_slab", grade::vWindowSlab));
+				toReturn.add(generateWlEntry(grade, "_vertical_window_vertical_slab", grade::vWindowVSlab));
+				toReturn.add(generateWlEntry(grade, "_horizontal_window", grade::hWindow));
+				toReturn.add(generateWlEntry(grade, "_horizontal_window_slab", grade::hWindowSlab));
+				toReturn.add(generateWlEntry(grade, "_horizontal_window_vertical_slab", grade::hWindowVSlab));
 			}
 
 			return toReturn;
@@ -126,11 +127,11 @@ public class VSCArmorBlocks {
 					: this.name + "_";
 		}
 
-		public Pair<String, Block> generateEntry(Grades grade, String suffix, Block block) {
+		public Pair<String, Supplier<Block>> generateEntry(Grades grade, String suffix, Supplier<Block> block) {
 			return Pair.of(prefix() + grade.name + suffix, block);
 		}
 
-		public Pair<String, Block> generateWlEntry(Grades grade, String suffix, Block block) {
+		public Pair<String, Supplier<Block>> generateWlEntry(Grades grade, String suffix, Supplier<Block> block) {
 			return Pair.of("wl_" + prefix() + grade.name + suffix, block);
 		}
 	}

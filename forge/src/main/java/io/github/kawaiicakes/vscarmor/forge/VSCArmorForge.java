@@ -12,6 +12,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
 @Mod(MOD_ID)
@@ -23,12 +25,12 @@ public class VSCArmorForge {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         VSCArmor.init();
 
-        for (Pair<String, Block> pair : VSCArmorBlocks.BLOCKS) {
-            BLOCKS_FORGE.register(pair.first(), pair::second);
+        for (Pair<String, Supplier<Block>> pair : VSCArmorBlocks.BLOCKS) {
+            BLOCKS_FORGE.register(pair.first(), pair.second());
         }
 
-        for (Pair<String, Item> pair : VSCArmorItems.ITEMS) {
-            ITEMS_FORGE.register(pair.first(), pair::second);
+        for (Pair<String, Supplier<Item>> pair : VSCArmorItems.ITEMS) {
+            ITEMS_FORGE.register(pair.first(), pair.second());
         }
 
         BLOCKS_FORGE.register(eventBus);
