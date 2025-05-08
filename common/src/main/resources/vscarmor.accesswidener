@@ -1,1 +1,10 @@
 accessWidener   v2  named
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_NNN   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_NNP   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_NPN   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_NPP   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_PNN   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_PNP   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_PPN   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  field   net/minecraft/world/level/block/StairBlock  OCTET_PPP   Lnet/minecraft/world/phys/shapes/VoxelShape;
+accessible  method  net/minecraft/world/level/block/StairBlock  makeShapes  (Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)[Lnet/minecraft/world/phys/shapes/VoxelShape;

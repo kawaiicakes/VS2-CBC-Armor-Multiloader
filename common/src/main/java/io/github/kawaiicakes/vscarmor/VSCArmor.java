@@ -1,11 +1,10 @@
 package io.github.kawaiicakes.vscarmor;
 
-import com.simibubi.create.Create;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO (2.0) - Use a BE instead of 9 morbillion registered blocks
+// TODO (2.1) - Use a BE instead of 9 morbillion registered blocks
 // TODO (2.0) - Eighths
 // TODO (2.0) - Reactive armour
 // TODO (2.0) - Alphabet shit.
@@ -19,16 +18,21 @@ import org.slf4j.LoggerFactory;
 // TODO (2.0) - Life preservers
 // TODO (2.0) - Teak
 // TODO (2.0) - Armoured decks
+// TODO (2.0) - Mesh fencing with edge-aligned placement options
 
 public class VSCArmor {
     public static final String MOD_ID = "vscarmor";
     public static final String NAME = "VS2/CBC Armor Blocks";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
-
     public static void init() {
-        LOGGER.info("{} initializing! Create version: {} on platform: {}", NAME, Create.VERSION, VSCArmorExpectPlatform.platformName());
-        VSCArmorBlocks.init(); // hold registrate in a separate class to avoid loading early on forge
+        LOGGER.info(
+                "{} initializing on platform: {}",
+                NAME,
+                VSCArmorExpectPlatform.platformName()
+        );
+
+        VSCArmorBlocks.init();
     }
 
     public static ResourceLocation id(String path) {
