@@ -57,12 +57,28 @@ processResources {
     }
 }
 
+def generatedResources = file("src/generated")
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
 loom {
     forge {
         mixinConfig(
                 "vscarmor-common.mixins.json",
                 "vscarmor.mixins.json"
         )
+    }
+
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "vscarmor"
+            programArgs "--output", generatedResources.absolutePath
+        }
     }
 }
 

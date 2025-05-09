@@ -2,6 +2,8 @@ package io.github.kawaiicakes.vscarmor;
 
 import io.github.kawaiicakes.vscarmor.block.*;
 import it.unimi.dsi.fastutil.Pair;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -9,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
 public class VSCArmorBlocks {
-	public static List<Pair<String, Supplier<Block>>> BLOCKS = new ArrayList<>();
+	public static final List<Pair<String, Supplier<Block>>> BLOCKS = new ArrayList<>();
 
 	public static Pattern[] patterns() {
 		return new Pattern[] {
@@ -71,6 +74,19 @@ public class VSCArmorBlocks {
 		}
 
 		VSCArmorItems.init(BLOCKS);
+	}
+
+	/**
+	 * Intended to be called only AFTER registration
+	 */
+	public static List<Block> blocks() {
+		List<Block> toReturn = new ArrayList<>(BLOCKS.size());
+
+		for (Pair<String, Supplier<Block>> entry : BLOCKS) {
+			toReturn.add(Registry.BLOCK.get(new ResourceLocation(MOD_ID, entry.left())));
+		}
+
+		return toReturn;
 	}
 
 	public record Pattern (

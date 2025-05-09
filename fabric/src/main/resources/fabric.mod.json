@@ -16,6 +16,9 @@
   "icon": "assets/vscarmor/icon.png",
   "environment": "*",
   "entrypoints": {
+    "fabric-datagen": [
+      "io.github.kawaiicakes.vscarmor.fabric.datagen.VSCArmorDataGenerator"
+    ],
     "client": [
       "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric"
     ],
