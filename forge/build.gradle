@@ -34,12 +34,15 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     // Create and its dependencies
-    modImplementation("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
-    modImplementation("com.tterrag.registrate:Registrate:$registrate_forge_version")
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
+    modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
+    modCompileOnly("com.tterrag.registrate:Registrate:$registrate_forge_version")
+    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
 
     // Development QOL
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
+    modLocalRuntime("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
+    modLocalRuntime("com.tterrag.registrate:Registrate:$registrate_forge_version")
+    modLocalRuntime("com.jozufozu.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
 }
 
 processResources {
