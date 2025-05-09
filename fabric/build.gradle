@@ -67,7 +67,7 @@ dependencies {
     // Development QOL
     modLocalRuntime("maven.modrinth:lazydfu:$lazydfu_version")
     modLocalRuntime("com.terraformersmc:modmenu:$modmenu_version")
-    modLocalRuntime("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
+    // modLocalRuntime("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 
     // Recipe Viewers - Create Fabric supports JEI, REI, and EMI.
     switch (fabric_recipe_viewer.toLowerCase(Locale.ROOT)) {

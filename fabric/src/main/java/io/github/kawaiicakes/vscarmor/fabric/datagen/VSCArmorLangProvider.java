@@ -48,22 +48,24 @@ public class VSCArmorLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         for (Block block : VSCArmorBlocks.blocks()) {
-            Item item = Registry.ITEM.get(Registry.BLOCK.getKey(block));
+            // Item item = Registry.ITEM.get(Registry.BLOCK.getKey(block));
 
             String name = sanitizeName(block.getDescriptionId());
             translationBuilder.add(block, name);
-            translationBuilder.add(item, name);
+            // translationBuilder.add(item, name);
         }
 
+        /*
         try {
             Path existingFilePath = this.dataGenerator
                     .getModContainer()
-                    .findPath("assets/vscarmor/lang/en_us.existing.json")
+                    .findPath("common/src/resources/assets/vscarmor/lang/en_us.existing.json")
                     .orElseThrow();
 
             translationBuilder.add(existingFilePath);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add existing language file!", e);
         }
+         */
     }
 }

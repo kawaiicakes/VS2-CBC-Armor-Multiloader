@@ -61,7 +61,7 @@ public class VSCArmorBlockLootTables extends FabricBlockLootTableProvider {
                 continue;
             }
 
-            add(block, createSlabItemTable(block));
+            this.dropSelf(block);
         }
     }
 }

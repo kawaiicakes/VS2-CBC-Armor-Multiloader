@@ -40,9 +40,9 @@ dependencies {
 
     // Development QOL
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
-    modLocalRuntime("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
-    modLocalRuntime("com.tterrag.registrate:Registrate:$registrate_forge_version")
-    modLocalRuntime("com.jozufozu.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
+    // modLocalRuntime("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
+    // modLocalRuntime("com.tterrag.registrate:Registrate:$registrate_forge_version")
+    // modLocalRuntime("com.jozufozu.flywheel:flywheel-forge-$flywheel_forge_minecraft_version:$flywheel_forge_version")
 }
 
 processResources {

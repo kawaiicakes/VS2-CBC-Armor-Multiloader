@@ -34,8 +34,4 @@ public class VSCArmor {
 
         VSCArmorBlocks.init();
     }
-
-    public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
-    }
 }
