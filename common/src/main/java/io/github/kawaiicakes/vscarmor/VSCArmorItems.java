@@ -25,7 +25,7 @@ public class VSCArmorItems {
                             pair.left(),
                             () -> new BlockItem(
                                     Registry.BLOCK.get(new ResourceLocation(MOD_ID, pair.left())),
-                                    new Item.Properties()
+                                    VSCArmorExpectPlatform.withTab(new Item.Properties())
                             )
                     )
             );

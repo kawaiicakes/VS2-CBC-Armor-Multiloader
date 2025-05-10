@@ -1,9 +1,8 @@
-package io.github.kawaiicakes.vscarmor.fabric.datagen;
+package io.github.kawaiicakes.vscarmor.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -20,7 +19,7 @@ import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 public class ValkyrienSkiesPropertyProvider implements DataProvider {
     public final DataGenerator.PathProvider pathResolver;
 
-    public ValkyrienSkiesPropertyProvider(FabricDataGenerator output) {
+    public ValkyrienSkiesPropertyProvider(DataGenerator output) {
         this.pathResolver = output.createPathProvider(DataGenerator.Target.DATA_PACK, "vs_mass");
     }
 

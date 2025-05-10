@@ -1,16 +1,15 @@
-package io.github.kawaiicakes.vscarmor.fabric.datagen;
+package io.github.kawaiicakes.vscarmor.datagen;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
 import io.github.kawaiicakes.vscarmor.client.model.ArmorBlockModels;
 import io.github.kawaiicakes.vscarmor.client.model.VerticalModels;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.ModelProvider;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
@@ -31,15 +30,9 @@ import java.util.function.Function;
 
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
-public class VSCArmorModelProvider extends FabricModelProvider {
-    public VSCArmorModelProvider(FabricDataGenerator output) {
+public abstract class VSCArmorModelProvider extends ModelProvider {
+    public VSCArmorModelProvider(DataGenerator output) {
         super(output);
-    }
-
-    @Override
-    public void generateBlockStateModels(BlockModelGenerators BlockModelGenerators) {
-        createSimpleModels(BlockModelGenerators);
-        createWaterlineModels(BlockModelGenerators);
     }
 
     public static void createSimpleModels(BlockModelGenerators generator) {
@@ -1487,9 +1480,6 @@ public class VSCArmorModelProvider extends FabricModelProvider {
                 .put(TextureSlot.BOTTOM, bottomTextureId)
                 .put(TextureSlot.END, windowTextureId);
     }
-
-    @Override
-    public void generateItemModels(ItemModelGenerators itemModelGenerator) {}
     
     public static ResourceLocation withSuffixedPath(ResourceLocation target, String append) {
         return new ResourceLocation(target.getNamespace(), target.getPath() + append);
