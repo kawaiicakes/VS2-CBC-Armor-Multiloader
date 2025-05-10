@@ -26,12 +26,20 @@ import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
+/**
+ * This isn't really intended to be implemented. It's just a bit of a hacky way to keep the actual model data in one
+ * place lol
+ */
 public abstract class VSCArmorModelProvider extends ModelProvider {
-    public VSCArmorModelProvider(DataGenerator output) {
+    public static final List<Block> BASE_BLOCKS = new ArrayList<>();
+
+    protected VSCArmorModelProvider(DataGenerator output) {
         super(output);
     }
 
@@ -61,6 +69,8 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                     .fence(fenceBlock)
                     .stairs(stairsBlock)
                     .wall(wallBlock);
+
+            BASE_BLOCKS.add(baseBlock);
 
             createVerticalSlab(
                     generator,
@@ -195,6 +205,8 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
             generator.new BlockFamilyProvider(map)
                     .fullBlock(baseBlock, ModelTemplates.CUBE_BOTTOM_TOP)
                     .slab(slabBlock);
+
+            BASE_BLOCKS.add(baseBlock);
 
             ResourceLocation innerBottomId
                     = ModelTemplates.STAIRS_INNER.create(stairsBlock, map, generator.modelOutput);

@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "ModelProviderAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

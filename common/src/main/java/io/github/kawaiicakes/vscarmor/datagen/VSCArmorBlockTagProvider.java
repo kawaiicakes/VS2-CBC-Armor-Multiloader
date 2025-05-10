@@ -20,7 +20,7 @@ public class VSCArmorBlockTagProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags() {
+    public void addTags() {
         TagBuilder pickaxeMineable = getOrCreateRawBuilder(BlockTags.MINEABLE_WITH_PICKAXE);
         TagBuilder beaconBase = getOrCreateRawBuilder(BlockTags.BEACON_BASE_BLOCKS);
         TagBuilder diamondTools = getOrCreateRawBuilder(BlockTags.NEEDS_DIAMOND_TOOL);
