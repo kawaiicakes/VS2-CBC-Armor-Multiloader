@@ -4542,5 +4542,6 @@
   "block.vscarmor.yellow_steel_armor_vertical_window": "Yellow Steel Armor Vertical Window",
   "block.vscarmor.yellow_steel_armor_vertical_window_slab": "Yellow Steel Armor Vertical Window Slab",
   "block.vscarmor.yellow_steel_armor_vertical_window_vertical_slab": "Yellow Steel Armor Vertical Window Vertical Slab",
-  "block.vscarmor.yellow_steel_armor_wall": "Yellow Steel Armor Wall"
+  "block.vscarmor.yellow_steel_armor_wall": "Yellow Steel Armor Wall",
+  "itemGroup.vscarmor_group": "Armor Blocks"
 }

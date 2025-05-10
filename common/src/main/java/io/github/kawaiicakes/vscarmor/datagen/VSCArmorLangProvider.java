@@ -2,6 +2,7 @@ package io.github.kawaiicakes.vscarmor.datagen;
 
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -62,6 +63,8 @@ public class VSCArmorLangProvider implements DataProvider {
             String name = sanitizeName(block.getDescriptionId());
             translationBuilder.accept(block.getDescriptionId(), name);
         }
+
+        translationBuilder.accept(VSCArmorExpectPlatform.tabName(), "Armor Blocks");
     }
 
     @Override

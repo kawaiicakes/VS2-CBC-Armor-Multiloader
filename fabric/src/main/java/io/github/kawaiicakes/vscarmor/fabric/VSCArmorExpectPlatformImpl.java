@@ -13,4 +13,8 @@ public class VSCArmorExpectPlatformImpl {
 	public static Item.Properties withTab(Item.Properties properties) {
 		return properties.tab(TAB);
 	}
+
+    public static String tabName() {
+		return "itemGroup.vscarmor.vscarmor_group";
+    }
 }

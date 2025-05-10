@@ -13,4 +13,9 @@ public class VSCArmorExpectPlatform {
     public static Item.Properties withTab(Item.Properties properties) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static String tabName() {
+        throw new AssertionError();
+    }
 }
