@@ -176,24 +176,28 @@ public class VSCArmorBlocks {
 
 		public BlockBehaviour.Properties base() {
 			return BlockBehaviour.Properties.copy(NETHERITE_BLOCK)
+					.sound(SoundType.METAL)
 					.destroyTime(this.hardness)
 					.explosionResistance(this.blastResistance);
 		}
 
 		public BlockBehaviour.Properties threeFourths() {
 			return BlockBehaviour.Properties.copy(NETHERITE_BLOCK)
+					.sound(SoundType.METAL)
 					.destroyTime(this.hardness * 0.75F)
 					.explosionResistance(this.blastResistance * 0.75F);
 		}
 
 		public BlockBehaviour.Properties half() {
 			return BlockBehaviour.Properties.copy(NETHERITE_BLOCK)
+					.sound(SoundType.METAL)
 					.destroyTime(this.hardness * 0.5F)
 					.explosionResistance(this.blastResistance * 0.5F);
 		}
 
 		public BlockBehaviour.Properties quarter() {
 			return BlockBehaviour.Properties.copy(NETHERITE_BLOCK)
+					.sound(SoundType.METAL)
 					.destroyTime(this.hardness * 0.25F)
 					.explosionResistance(this.blastResistance * 0.25F);
 		}
