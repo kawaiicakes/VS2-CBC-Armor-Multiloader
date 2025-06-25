@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
-import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.block.AbstractWindowSlab;
 import io.github.kawaiicakes.vscarmor.block.AbstractWindowVerticalSlab;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
@@ -37,7 +37,7 @@ public abstract class VSCArmorBlockLootTables {
     }
 
     public static void generate(BlockLoot blockLoot) {
-        for (Block block : VSCArmorBlocks.blocks()) {
+        for (Block block : VSCArmorRegistry.blocks()) {
             if (block instanceof SlabBlock slab) {
                 blockLoot.add(slab, createSlabItemTable(slab));
                 continue;

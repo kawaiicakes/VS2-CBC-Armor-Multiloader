@@ -38,7 +38,6 @@ public class VSCArmorModelProviderForge extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         VSCArmorModelProvider.createSimpleModels(this.blockDelegate);
-        VSCArmorModelProvider.createWaterlineModels(this.blockDelegate);
 
         // this isn't done automatically on forge for whatever reason
         for (Block block : VSCArmorModelProvider.BASE_BLOCKS) {

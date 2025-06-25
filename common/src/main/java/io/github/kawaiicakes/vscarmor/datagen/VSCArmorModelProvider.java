@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
-import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.block.Grades;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
 import io.github.kawaiicakes.vscarmor.client.model.ArmorBlockModels;
@@ -44,7 +44,8 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
     }
 
     public static void createSimpleModels(BlockModelGenerators generator) {
-        for (String pattern : allBlockGradesAndPatternCombinations()) {
+        for (Grades grade : Grades.values()) {
+            String pattern = grade.getSerializedName();
             ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
 
             Block baseBlock = Registry.BLOCK.get(baseBlockId);
@@ -159,227 +160,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                     generator,
                     pattern,
                     block -> window(block, "", "", ""),
-                    ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_SLAB,
-                    ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_SLAB_EMPTY
-            );
-        }
-    }
-
-    public static void createWaterlineModels(BlockModelGenerators generator) {
-        for (String pattern : allBlockGradesAndPatternCombinations()) {
-            if (pattern.startsWith("black_")) continue;
-
-            ResourceLocation topPatternId = withPrefixedPath(new ResourceLocation(MOD_ID, pattern), "block/");
-            ResourceLocation waterlineBaseId = new ResourceLocation(MOD_ID, "wl_" + pattern);
-
-            String bottomPath = getWaterlineBottomPath(topPatternId);
-
-            ResourceLocation blackPatternId = withPrefixedPath(
-                    new ResourceLocation(MOD_ID, bottomPath), "block/"
-            );
-
-            Block baseBlock = Registry.BLOCK.get(waterlineBaseId);
-            Block slabBlock = Registry.BLOCK.get(withSuffixedPath(waterlineBaseId, "_slab"));
-            Block stairsBlock = Registry.BLOCK.get(withSuffixedPath(waterlineBaseId, "_stairs"));
-            Block wallBlock = Registry.BLOCK.get(withSuffixedPath(waterlineBaseId, "_wall"));
-            Block fenceBlock = Registry.BLOCK.get(withSuffixedPath(waterlineBaseId, "_fence"));
-
-            ResourceLocation baseBlockModelId = TextureMapping.getBlockTexture(baseBlock);
-
-            final TextureMapping map = TextureMapping.cube(baseBlockModelId)
-                    .put(TextureSlot.SIDE, baseBlockModelId)
-                    .put(TextureSlot.TOP, topPatternId)
-                    .put(TextureSlot.BOTTOM, blackPatternId)
-                    .put(TextureSlot.END, baseBlockModelId)
-                    .put(TextureSlot.TEXTURE, baseBlockModelId)
-                    .put(TextureSlot.WALL, baseBlockModelId);
-
-            final TextureMapping invertedMap = TextureMapping.cube(baseBlockModelId)
-                    .put(TextureSlot.SIDE, baseBlockModelId)
-                    .put(TextureSlot.TOP, blackPatternId)
-                    .put(TextureSlot.BOTTOM, topPatternId)
-                    .put(TextureSlot.END, baseBlockModelId)
-                    .put(TextureSlot.TEXTURE, baseBlockModelId)
-                    .put(TextureSlot.WALL, baseBlockModelId);
-
-            generator.new BlockFamilyProvider(map)
-                    .fullBlock(baseBlock, ModelTemplates.CUBE_BOTTOM_TOP)
-                    .slab(slabBlock);
-
-            BASE_BLOCKS.add(baseBlock);
-
-            ResourceLocation innerBottomId
-                    = ModelTemplates.STAIRS_INNER.create(stairsBlock, map, generator.modelOutput);
-            ResourceLocation straightBottomId
-                    = ModelTemplates.STAIRS_STRAIGHT.create(stairsBlock, map, generator.modelOutput);
-            ResourceLocation outerBottomId
-                    = ModelTemplates.STAIRS_OUTER.create(stairsBlock, map, generator.modelOutput);
-            ResourceLocation innerTopId
-                    = ArmorBlockModels.INNER_STAIRS_TOP.create(stairsBlock, invertedMap, generator.modelOutput);
-            ResourceLocation straightTopId
-                    = ArmorBlockModels.STAIRS_TOP.create(stairsBlock, invertedMap, generator.modelOutput);
-            ResourceLocation outerTopId
-                    = ArmorBlockModels.OUTER_STAIRS_TOP.create(stairsBlock, invertedMap, generator.modelOutput);
-            generator.blockStateOutput.accept(
-                    createWaterlineStairsBlockstate(
-                            stairsBlock,
-                            innerBottomId, straightBottomId, outerBottomId,
-                            innerTopId, straightTopId, outerTopId
-                    )
-            );
-
-            generator.delegateItemModel(stairsBlock, straightBottomId);
-
-            ResourceLocation wallPostId
-                    = ArmorBlockModels.TEMPLATE_WALL_POST.create(wallBlock, map, generator.modelOutput);
-            ResourceLocation wallSideId
-                    = ArmorBlockModels.TEMPLATE_WALL_SIDE.create(wallBlock, map, generator.modelOutput);
-            ResourceLocation wallSideTallId
-                    = ArmorBlockModels.TEMPLATE_WALL_SIDE_TALL.create(wallBlock, map, generator.modelOutput);
-
-            generator.blockStateOutput.accept(
-                    BlockModelGenerators.createWall(
-                            wallBlock, wallPostId, wallSideId, wallSideTallId
-                    )
-            );
-
-            ResourceLocation wallInventoryId
-                    = ArmorBlockModels.WALL_INVENTORY.create(wallBlock, map, generator.modelOutput);
-            generator.delegateItemModel(wallBlock, wallInventoryId);
-
-            ResourceLocation fencePost = ArmorBlockModels.FENCE_POST.create(fenceBlock, map, generator.modelOutput);
-            ResourceLocation fenceSide = ArmorBlockModels.FENCE_SIDE.create(fenceBlock, map, generator.modelOutput);
-            generator.blockStateOutput.accept(
-                    BlockModelGenerators.createFence(fenceBlock, fencePost, fenceSide)
-            );
-            ResourceLocation fenceInventory = ArmorBlockModels.FENCE_INVENTORY.create(
-                    fenceBlock, map, generator.modelOutput
-            );
-            generator.delegateItemModel(fenceBlock, fenceInventory);
-
-            createVerticalSlab(
-                    generator,
-                    "wl_" + pattern,
-                    VSCArmorModelProvider::sideTopBottomWaterline
-            );
-            createVerticalStairs(
-                    generator,
-                    "wl_" + pattern,
-                    VSCArmorModelProvider::sideTopBottomWaterline
-            );
-
-            createWindow(
-                    "_porthole",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.PORTHOLE, ArmorBlockModels.PORTHOLE_EMPTY,
-                    ArmorBlockModels.VERTICAL_PORTHOLE, ArmorBlockModels.VERTICAL_PORTHOLE_EMPTY
-            );
-
-            createWindowSlab(
-                    "_porthole_slab", "_porthole_vertical",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.PORTHOLE_SLAB, ArmorBlockModels.PORTHOLE_SLAB_EMPTY,
-                    ArmorBlockModels.PORTHOLE_SLAB_TOP, ArmorBlockModels.PORTHOLE_SLAB_TOP_EMPTY
-            );
-
-            createWindowVerticalSlab(
-                    "_porthole_vertical_slab", "_porthole",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.PORTHOLE_VERTICAL_SLAB, ArmorBlockModels.PORTHOLE_VERTICAL_SLAB_EMPTY
-            );
-
-            createWindow(
-                    "_vertical_window",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.VERTICAL_WINDOW, ArmorBlockModels.VERTICAL_WINDOW_EMPTY,
-                    ArmorBlockModels.VERTICAL_WINDOW_VERTICAL, ArmorBlockModels.VERTICAL_WINDOW_VERTICAL_EMPTY
-            );
-
-            createWindowSlab(
-                    "_vertical_window_slab", "_vertical_window_vertical",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.VERTICAL_WINDOW_SLAB, ArmorBlockModels.VERTICAL_WINDOW_SLAB_EMPTY,
-                    ArmorBlockModels.VERTICAL_WINDOW_SLAB_TOP, ArmorBlockModels.VERTICAL_WINDOW_SLAB_TOP_EMPTY
-            );
-
-            createWindowVerticalSlab(
-                    "_vertical_window_vertical_slab", "_vertical_window",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.VERTICAL_WINDOW_VERTICAL_SLAB,
-                    ArmorBlockModels.VERTICAL_WINDOW_VERTICAL_SLAB_EMPTY
-            );
-
-            createWindow(
-                    "_horizontal_window",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.HORIZONTAL_WINDOW, ArmorBlockModels.HORIZONTAL_WINDOW_EMPTY,
-                    ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL, ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_EMPTY
-            );
-
-            createWindowSlab(
-                    "_horizontal_window_slab", "_horizontal_window_vertical",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
-                    ArmorBlockModels.HORIZONTAL_WINDOW_SLAB, ArmorBlockModels.HORIZONTAL_WINDOW_SLAB_EMPTY,
-                    ArmorBlockModels.HORIZONTAL_WINDOW_SLAB_TOP, ArmorBlockModels.HORIZONTAL_WINDOW_SLAB_TOP_EMPTY
-            );
-
-            createWindowVerticalSlab(
-                    "_horizontal_window_vertical_slab", "_horizontal_window",
-                    generator,
-                    "wl_" + pattern,
-                    block -> window(
-                            block, "",
-                            MOD_ID + ":" + pattern,
-                            MOD_ID + ":" + getWaterlineBottomPath(Registry.BLOCK.getKey(block))
-                    ),
                     ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_SLAB,
                     ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_SLAB_EMPTY
             );
@@ -1408,27 +1188,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
                                 )
                 );
-    }
-
-    public static String[] allBlockGradesAndPatternCombinations() {
-        VSCArmorBlocks.Pattern[] patterns = VSCArmorBlocks.patterns();
-
-        String[] toReturn = new String[patterns.length * 4];
-
-        int colorIndex = 0;
-        for (VSCArmorBlocks.Pattern pattern : patterns) {
-
-            String prefix = pattern.prefix();
-
-            toReturn[colorIndex * 4] = (prefix + "light_armor");
-            toReturn[(colorIndex * 4) + 1] = (prefix + "steel_armor");
-            toReturn[(colorIndex * 4) + 2] = (prefix + "composite_armor");
-            toReturn[(colorIndex * 4) + 3] = (prefix + "reinforced_armor");
-
-            colorIndex++;
-        }
-
-        return toReturn;
     }
 
     public static TextureMapping sideTopBottomSimple(Block block) {

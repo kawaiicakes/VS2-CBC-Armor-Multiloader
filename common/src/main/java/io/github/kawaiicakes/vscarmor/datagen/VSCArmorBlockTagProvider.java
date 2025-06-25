@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
-import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
 import net.minecraft.core.Registry;
@@ -29,7 +29,7 @@ public class VSCArmorBlockTagProvider extends BlockTagsProvider {
         TagBuilder fenceBlocks = getOrCreateRawBuilder(BlockTags.FENCES);
         TagBuilder wallBlocks = getOrCreateRawBuilder(BlockTags.WALLS);
 
-        for (Block block : VSCArmorBlocks.blocks()) {
+        for (Block block : VSCArmorRegistry.blocks()) {
             pickaxeMineable.addElement(Registry.BLOCK.getKey(block));
             diamondTools.addElement(Registry.BLOCK.getKey(block));
             witherImmune.addElement(Registry.BLOCK.getKey(block));

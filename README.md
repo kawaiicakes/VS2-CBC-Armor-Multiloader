@@ -4,23 +4,12 @@ ___
 
 ### Elegant armor blocks designed for use with Create: Big Cannons & Valkyrien Skies.
 
-<img alt="Mod Loader" src="https://img.shields.io/badge/mod_loader-fabric-ffe8e9?style=for-the-badge&labelColor=ffced2">
-<img alt="Game Version" src="https://img.shields.io/badge/game_version-1.19.2-ffe8e9?style=for-the-badge&labelColor=ffced2">
-<img alt="Environment" src="https://img.shields.io/badge/environment-client | server-ffe8e9?style=for-the-badge&labelColor=ffced2">
-<br>
-<a href="https://www.curseforge.com/minecraft/mc-mods/VS-Create-Armor" rel="nofollow">
-    <img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1212994?style=for-the-badge&logo=curseforge&labelColor=ffceea&color=ffe8f5">
-</a>
-<a href="https://github.com/kawaiicakes/VS-Create-Armor/blob/1.19.2-multiloader/LICENSE" rel="nofollow">
-    <img alt="Software License" src="https://img.shields.io/badge/license-MIT-ffe8f5?style=for-the-badge&labelColor=ffceea">
-</a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/vs-create-armor" rel="nofollow">
-    <img alt="GitHub Issues" src="https://img.shields.io/github/issues/kawaiicakes/VS-Create-Armor?style=for-the-badge&logo=github&labelColor=ffceea&color=ffe8f5&link=https%3A%2F%2Fgithub.com%2Fkawaiicakes%2FVS-Create-Armor">
-</a>
-<br>
-<a href="https://github.com/kawaiicakes" rel="nofollow">
-    <img alt="GitHub" src="https://img.shields.io/badge/-github-fee8ff?style=for-the-badge&logo=github&labelColor=fcceff">
-</a>
+![Mod Loader](https://img.shields.io/badge/mod_loader-forge_|_fabric-ffe8e9?style=for-the-badge&labelColor=ffced2)
+![Environment](https://img.shields.io/badge/environment-client_|_server-ffe8e9?style=for-the-badge&labelColor=ffced2)
+[![Bug Reports](https://img.shields.io/github/issues/kawaiicakes/VS-Create-Armor?style=for-the-badge&logo=github&labelColor=ffe8e9&color=ffced2)](https://github.com/kawaiicakes/VS-Create-Armor/issues)
+
+[![CurseForge](https://img.shields.io/curseforge/dt/1212994?style=for-the-badge&logo=curseforge&labelColor=ffceea&color=ffe8f5)](https://www.curseforge.com/minecraft/mc-mods/vs-create-armor)
+[![Modrinth](https://img.shields.io/modrinth/dt/MODRINTH_ID?style=for-the-badge&logo=modrinth&labelColor=ffceea&color=ffe8f5)](https://modrinth.com/project/vscarmor)
 
 ___
 
@@ -51,10 +40,6 @@ ___
 
 Code by me!
 <br>
-Art & textures lovingly made by [BlackBirdAntlion!](https://x.com/BlackbirdieAnt)
+Art & textures lovingly made by [BlackBirdAntlion!](https://x.com/BlackbirdieAnt) Please note that the MIT licensing of this mod only applies to the code! DO NOT REUSE ART ASSETS WITHOUT PERMISSION!
 
 ___
-
-<div style="text-align: center;">Also, check out my very lovely sponsor and help me <s>take over</s> improve the world! I genuinely love DediMC's services, and its incredible customer support has won me over.</div>
-
-[![Sponsor!](https://github.com/kawaiicakes/kawaiicakes.github.io/blob/main/dedimcashley.png?raw=true 'Sponsor!')](https://dedimc.promo/ashley)

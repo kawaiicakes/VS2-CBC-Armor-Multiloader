@@ -2,7 +2,7 @@ package io.github.kawaiicakes.vscarmor.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -33,7 +33,7 @@ public class ValkyrienSkiesPropertyProvider implements DataProvider {
     }
 
     public static JsonArray properties() {
-        List<Block> blocks = VSCArmorBlocks.blocks();
+        List<Block> blocks = List.of(VSCArmorRegistry.blocks());
 
         JsonArray toReturn = new JsonArray(blocks.size());
 

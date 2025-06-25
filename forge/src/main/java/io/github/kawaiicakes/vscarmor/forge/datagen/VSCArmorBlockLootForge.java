@@ -3,7 +3,7 @@ package io.github.kawaiicakes.vscarmor.forge.datagen;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
-import io.github.kawaiicakes.vscarmor.VSCArmorBlocks;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.datagen.VSCArmorBlockLootTables;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
@@ -33,7 +33,7 @@ public class VSCArmorBlockLootForge extends LootTableProvider {
         public void accept(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> biConsumer) {
             Set<ResourceLocation> set = Sets.newHashSet();
 
-            List<Block> blocks = VSCArmorBlocks.blocks();
+            List<Block> blocks = List.of(VSCArmorRegistry.blocks());
 
             for (Block block : blocks) {
                 ResourceLocation resourceLocation = block.getLootTable();

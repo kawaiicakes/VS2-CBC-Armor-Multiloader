@@ -20,7 +20,7 @@
       "io.github.kawaiicakes.vscarmor.fabric.datagen.VSCArmorDataGenerator"
     ],
     "client": [
-      "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric"
+      "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric$Client"
     ],
     "main": [
       "io.github.kawaiicakes.vscarmor.fabric.VSCArmorFabric"
