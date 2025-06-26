@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 import static net.minecraft.core.Registry.*;
 
 public class VSCArmorRegistryImpl {
-    public static final List<Block> BLOCKS = new ArrayList<>();
+    public static final List<Block> MOD_BLOCKS = new ArrayList<>();
 
     public static BlockEntityType<ColorableBlockEntity> COLORABLE_BE_TYPE = register(
             BLOCK_ENTITY_TYPE,
@@ -35,18 +35,8 @@ public class VSCArmorRegistryImpl {
         return Registry.register(registry, new ResourceLocation(VSCArmor.MOD_ID, name), object);
     }
 
-    private static Block getBlock(String name) {
-        return BLOCK.get(new ResourceLocation(VSCArmor.MOD_ID, name));
-    }
-
     public static Block[] blocks() {
-        if (BLOCKS.isEmpty()) {
-            for (String block : VSCArmorRegistry.ORDERED_BLOCK_NAMES) {
-                BLOCKS.add(getBlock(block));
-            }
-        }
-
-        return BLOCKS.toArray(Block[]::new);
+        return MOD_BLOCKS.toArray(Block[]::new);
     }
 
     public static void registerBlocksAndItems(Map<String, Supplier<Block>> forRegistration) {
@@ -54,6 +44,7 @@ public class VSCArmorRegistryImpl {
             Block block = entry.getValue().get();
 
             register(BLOCK, entry.getKey(), block);
+            MOD_BLOCKS.add(block);
             register(ITEM, entry.getKey(), new ColorableBlockItem(block));
         }
     }

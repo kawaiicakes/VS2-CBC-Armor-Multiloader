@@ -9,7 +9,6 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-// FIXME: This doesn't work
 public class VSCArmorFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
