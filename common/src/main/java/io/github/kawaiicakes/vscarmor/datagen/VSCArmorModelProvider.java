@@ -1,10 +1,10 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
-import io.github.kawaiicakes.vscarmor.block.Grade;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
-import io.github.kawaiicakes.vscarmor.client.model.ArmorBlockModels;
 import io.github.kawaiicakes.vscarmor.client.model.VerticalModels;
+import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -19,31 +19,41 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.block.state.properties.StairsShape;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
+// TODO - make models generate with tint indices
 /**
  * This isn't really intended to be implemented. It's just a bit of a hacky way to keep the actual model data in one
  * place lol
  */
 public abstract class VSCArmorModelProvider extends ModelProvider {
-    public static final List<Block> BASE_BLOCKS = new ArrayList<>();
-
     protected VSCArmorModelProvider(DataGenerator output) {
         super(output);
     }
 
-    public static void createSimpleModels(BlockModelGenerators generator) {
+    public static void generateModels(BlockModelGenerators generator) {
+        for (Block block : VSCArmorRegistry.blocks()) {
+            ColorableBlock colorable = (ColorableBlock) block;
+
+            ResourceLocation baseBlockModelId = TextureMapping.getBlockTexture(block);
+
+            final TextureMapping map = TextureMapping.cube(baseBlockModelId)
+                    .put(TextureSlot.SIDE, baseBlockModelId)
+                    .put(TextureSlot.TOP, baseBlockModelId)
+                    .put(TextureSlot.BOTTOM, baseBlockModelId)
+                    .put(TextureSlot.END, baseBlockModelId)
+                    .put(TextureSlot.TEXTURE, baseBlockModelId)
+                    .put(TextureSlot.WALL, baseBlockModelId);
+
+            generator.new BlockFamilyProvider(map)
+                    .fullBlock(block, ModelTemplates.CUBE_ALL);
+        }
+        /*
         for (Grade grade : Grade.values()) {
             String pattern = grade.getSerializedName();
             ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
@@ -70,8 +80,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                     .fence(fenceBlock)
                     .stairs(stairsBlock)
                     .wall(wallBlock);
-
-            BASE_BLOCKS.add(baseBlock);
 
             createVerticalSlab(
                     generator,
@@ -164,6 +172,7 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                     ArmorBlockModels.HORIZONTAL_WINDOW_VERTICAL_SLAB_EMPTY
             );
         }
+         */
     }
 
     public static void createVerticalSlab(
@@ -346,309 +355,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
         );
 
         generator.delegateItemModel(portholeVSlab, portholeSlabModelId);
-    }
-
-    public static BlockStateGenerator createWaterlineStairsBlockstate(
-            Block stairsBlock,
-            ResourceLocation innerBottomModelId, 
-            ResourceLocation regularBottomModelId, 
-            ResourceLocation outerBottomModelId,
-            ResourceLocation innerTopModelId, ResourceLocation regularTopModelId, ResourceLocation outerTopModelId
-    ) {
-        return MultiVariantGenerator.multiVariant(stairsBlock)
-                .with(
-                        PropertyDispatch
-                                .properties(
-                                        BlockStateProperties.HORIZONTAL_FACING,
-                                        StairBlock.HALF,
-                                        StairBlock.SHAPE
-                                )
-                                .select(
-                                        Direction.EAST, Half.BOTTOM, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularBottomModelId)
-                                )
-                                .select(
-                                        Direction.WEST, Half.BOTTOM, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.BOTTOM, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.BOTTOM, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.BOTTOM, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                )
-                                .select(
-                                        Direction.WEST, Half.BOTTOM, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.BOTTOM, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.BOTTOM, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.BOTTOM, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.BOTTOM, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.BOTTOM, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                )
-                                .select(
-                                        Direction.WEST, Half.BOTTOM, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.BOTTOM, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.BOTTOM, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.BOTTOM, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.BOTTOM, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.BOTTOM, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerBottomModelId)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.TOP, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.TOP, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.TOP, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.TOP, StairsShape.STRAIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, regularTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.TOP, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.TOP, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.TOP, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.TOP, StairsShape.OUTER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.TOP, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.TOP, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.TOP, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.TOP, StairsShape.OUTER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, outerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.TOP, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.TOP, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.TOP, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.TOP, StairsShape.INNER_RIGHT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.EAST, Half.TOP, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.WEST, Half.TOP, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.SOUTH, Half.TOP, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                                .select(
-                                        Direction.NORTH, Half.TOP, StairsShape.INNER_LEFT,
-                                        Variant.variant()
-                                                .with(VariantProperties.MODEL, innerTopModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
-                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, true)
-                                )
-                );
     }
 
     public static BlockStateGenerator createVerticalSlabBlockstate(
@@ -1062,7 +768,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                 );
     }
 
-    // TODO (1.1) - Implement empty blockstate
     public static BlockStateGenerator createWindowBlockstate(
             Block windowBlock,
             ResourceLocation windowModelId, ResourceLocation emptyWindowModelId,
@@ -1095,7 +800,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                 );
     }
 
-    // TODO (1.1) - Implement empty blockstate
     public static BlockStateGenerator createWindowSlabBlockstate(
             Block windowBlock,
             ResourceLocation slabDoubleModel, ResourceLocation slabDoubleEmptyModel,
@@ -1127,7 +831,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                 );
     }
 
-    // TODO (1.1) - Implement empty blockstate
     public static BlockStateGenerator createWindowVerticalSlabBlockstate(
             Block vSlabBlock,
             ResourceLocation vSlabBlockModelId, ResourceLocation vSlabBlockEmptyModelId,
@@ -1195,41 +898,6 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block));
-    }
-
-    public static TextureMapping sideTopBottomWaterline(Block block) {
-        String pattern = Registry.BLOCK.getKey(block).getPath();
-
-        ResourceLocation topPatternId = withPrefixedPath(
-                new ResourceLocation(MOD_ID, pattern.replaceFirst("wl_", "")), 
-                "block/"
-        );
-
-        ResourceLocation waterlineBaseId = withPrefixedPath(new ResourceLocation(MOD_ID, pattern), "block/");
-
-        String bottomPath = getWaterlineBottomPath(topPatternId);
-
-        ResourceLocation blackPatternId = withPrefixedPath(new ResourceLocation(MOD_ID, bottomPath), "block/");
-
-        return new TextureMapping()
-                .put(TextureSlot.SIDE, waterlineBaseId)
-                .put(TextureSlot.TOP, topPatternId)
-                .put(TextureSlot.BOTTOM, blackPatternId);
-    }
-
-    @NotNull
-    private static String getWaterlineBottomPath(ResourceLocation topPatternId) {
-        String bottomPath = "black";
-        if (topPatternId.getPath().contains("reinforced_armor")) {
-            bottomPath += "_reinforced_armor";
-        } else if (topPatternId.getPath().contains("light_armor")) {
-            bottomPath += "_light_armor";
-        } else if (topPatternId.getPath().contains("steel_armor")) {
-            bottomPath += "_steel_armor";
-        } else if (topPatternId.getPath().contains("composite_armor")) {
-            bottomPath += "_composite_armor";
-        }
-        return bottomPath;
     }
 
     /**

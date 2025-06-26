@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/fence_side",
-  "textures": {
-    "texture": "vscarmor:block/light_gray_composite_armor"
-  }
-}

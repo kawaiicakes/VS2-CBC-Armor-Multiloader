@@ -1,34 +1,42 @@
 package io.github.kawaiicakes.vscarmor.block;
 
 import net.minecraft.util.StringRepresentable;
+import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
 
 public enum Pattern implements StringRepresentable {
-    NONE(""),
-    DESERT("desert"),
-    FOREST("forest"),
-    WOODLAND_POLYGON("woodland_polygon"),
-    GRAY_POLYGON("gray_polygon"),
-    BUSH("bush"),
-    ARCTIC("arctic"),
-    RAINBOW("rainbow");
+    NONE(false),
+    DESERT(true),
+    FOREST(true),
+    WOODLAND_POLYGON(true),
+    GRAY_POLYGON(true),
+    BUSH(true),
+    ARCTIC(true),
+    RAINBOW(false);
 
-    private final String pattern;
+    private final boolean isCamo;
 
-    Pattern(String pattern) {
-        this.pattern = pattern;
+    Pattern(boolean isCamo) {
+        this.isCamo = isCamo;
     }
 
     @Override
     public @NotNull String getSerializedName() {
-        return this.pattern;
+        return this.toString().toLowerCase();
     }
 
-    public String generateBlockName(Grade grade) {
-        String prefix = this.getSerializedName().isBlank()
-                ? ""
-                : this.getSerializedName() + "_";
+    public String asPrefix() {
+        String toReturn = this.getSerializedName();
 
-        return prefix + grade.getSerializedName();
+        return this.equals(NONE) ? "" : toReturn + "_";
+    }
+
+    @SuppressWarnings("deprecation")
+    public String asPrettyPrefix() {
+        String toReturn = this.getSerializedName();
+
+        if (this.isCamo) toReturn = toReturn + " Camo";
+
+        return this.equals(NONE) ? "" : WordUtils.capitalize(toReturn.replace("_", "")) + " ";
     }
 }

@@ -1,6 +1,7 @@
 package io.github.kawaiicakes.vscarmor;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
 import io.github.kawaiicakes.vscarmor.block.Grade;
 import io.github.kawaiicakes.vscarmor.block.Pattern;
 import io.github.kawaiicakes.vscarmor.decal.ColorableBlockEntity;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
+// TODO - Group blocks by Grade
 /**
  * Do not make calls to methods in this class unless you are sure registration has completed
  */
@@ -28,15 +31,25 @@ public class VSCArmorRegistry {
 
         for (Grade grade : Grade.values()) {
             for (Pattern pattern : Pattern.values()) {
-                String generatedName = pattern.generateBlockName(grade);
-                ORDERED_BLOCK_NAMES.add(generatedName);
-                grade.generateSeries(
-                        (blockSupplier) -> generated.put(generatedName, blockSupplier)
+                generateSeries(
+                        pattern.asPrefix() + grade.getSerializedName(),
+                        generated::put,
+                        grade,
+                        pattern
                 );
             }
         }
 
         registerBlocksAndItems(generated);
+    }
+
+    public static void generateSeries(
+            String seriesName,
+            BiConsumer<String, Supplier<Block>> blockConsumer,
+            Grade grade, Pattern pattern
+    ) {
+        ORDERED_BLOCK_NAMES.add(seriesName);
+        blockConsumer.accept(seriesName, () -> new ArmorBlock(grade.properties(), grade, pattern));
     }
 
     @ExpectPlatform

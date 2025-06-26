@@ -2,6 +2,8 @@ package io.github.kawaiicakes.vscarmor.forge.datagen;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.github.kawaiicakes.vscarmor.VSCArmor;
+import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.datagen.VSCArmorModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -12,6 +14,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
@@ -37,13 +40,15 @@ public class VSCArmorModelProviderForge extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        VSCArmorModelProvider.createSimpleModels(this.blockDelegate);
+        VSCArmorModelProvider.generateModels(this.blockDelegate);
 
         // this isn't done automatically on forge for whatever reason
-        for (Block block : VSCArmorModelProvider.BASE_BLOCKS) {
-            ResourceLocation location = ForgeRegistries.BLOCKS.getKey(block);
+        for (String blockName : VSCArmorRegistry.ORDERED_BLOCK_NAMES) {
+            ResourceLocation location = new ResourceLocation(VSCArmor.MOD_ID, blockName);
 
-            if (location == null) continue;
+            Block block = RegistryObject.create(location, ForgeRegistries.BLOCKS).orElseGet(() -> null);
+
+            if (block == null) continue;
 
             this.simpleBlockItem(
                     block,

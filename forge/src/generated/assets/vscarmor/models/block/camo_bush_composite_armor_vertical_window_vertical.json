@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/vertical_window_vertical",
-  "textures": {
-    "bottom": "vscarmor:block/camo_bush_composite_armor",
-    "side": "vscarmor:block/camo_bush_composite_armor",
-    "top": "vscarmor:block/camo_bush_composite_armor"
-  }
-}

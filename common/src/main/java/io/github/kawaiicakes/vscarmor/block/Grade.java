@@ -1,11 +1,8 @@
 package io.github.kawaiicakes.vscarmor.block;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import org.apache.commons.lang3.text.WordUtils;
 
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
@@ -41,12 +38,17 @@ public enum Grade implements StringRepresentable {
 				.explosionResistance(this.blastResistance * multiplier);
 	}
 
-	public void generateSeries(Consumer<Supplier<Block>> blockConsumer) {
-		blockConsumer.accept(() -> new ArmorBlock(properties()));
-	}
-
 	@Override
 	public String getSerializedName() {
 		return this.name;
+	}
+
+	@SuppressWarnings("deprecation")
+    public String getDisplayName() {
+		return WordUtils.capitalize(this.getSerializedName().replace("_", " "));
+	}
+
+	public double getMass() {
+		return this.mass;
 	}
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/outer_vertical_stairs_right_bottom",
-  "textures": {
-    "bottom": "vscarmor:block/dunkelgelb_composite_armor",
-    "side": "vscarmor:block/dunkelgelb_composite_armor",
-    "top": "vscarmor:block/dunkelgelb_composite_armor"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "vscarmor:block/panzergrau_light_armor",
-    "side": "vscarmor:block/panzergrau_light_armor",
-    "top": "vscarmor:block/panzergrau_light_armor"
-  }
-}

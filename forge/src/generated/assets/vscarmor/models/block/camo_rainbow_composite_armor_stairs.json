@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "vscarmor:block/camo_rainbow_composite_armor",
-    "side": "vscarmor:block/camo_rainbow_composite_armor",
-    "top": "vscarmor:block/camo_rainbow_composite_armor"
-  }
-}

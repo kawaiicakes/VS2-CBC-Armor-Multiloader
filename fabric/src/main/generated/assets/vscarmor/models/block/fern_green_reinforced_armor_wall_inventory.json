@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "vscarmor:block/fern_green_reinforced_armor"
-  }
-}

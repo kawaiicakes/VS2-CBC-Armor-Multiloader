@@ -3,11 +3,11 @@ package io.github.kawaiicakes.vscarmor.datagen;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
+import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.world.level.block.Block;
-import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -28,39 +28,12 @@ public class VSCArmorLangProvider implements DataProvider {
         this.languageCode = languageCode;
     }
 
-    // Surely nothing can go horribly wrong here!
-    @SuppressWarnings("deprecation")
-    private static String sanitizeName(String rawId) {
-        String toReturn = WordUtils.capitalize(
-                rawId.replace("block.vscarmor.", "").replace("_", " ")
-        );
-
-        toReturn = toReturn
-                .replaceFirst("Ab ", "Alphabet ")
-                .replaceFirst("Wl ", "Waterline ")
-                .replaceFirst("29 ", "Blue #29 ")
-                .replaceFirst("31 ", "Gray #31 ")
-                .replaceFirst("32 ", "Gray #32 ")
-                .replaceFirst("33 ", "Blue #33 ")
-                .replaceFirst("4b0 ", "Soviet 4B0 Green ");
-
-        if (toReturn.contains("Camo ")) {
-            String waterline = toReturn.contains("Waterline ") ? "Waterline " : "";
-            toReturn = toReturn.replaceFirst("Waterline ", "");
-
-            toReturn = toReturn.replaceFirst("Camo ", "");
-
-            String[] split = toReturn.split(" ", 2);
-
-            toReturn = waterline + split[0] + " Camo " + split[1];
-        }
-
-        return toReturn;
-    }
-
     public void generateTranslations(BiConsumer<String, String> translationBuilder) {
         for (Block block : VSCArmorRegistry.blocks()) {
-            String name = sanitizeName(block.getDescriptionId());
+            ColorableBlock asColorable = ((ColorableBlock) block);
+            String pattern = asColorable.getPattern().asPrettyPrefix();
+            String grade = asColorable.getGrade().getDisplayName();
+            String name = pattern + grade + asColorable.getType().asPrettySuffix();
             translationBuilder.accept(block.getDescriptionId(), name);
         }
 

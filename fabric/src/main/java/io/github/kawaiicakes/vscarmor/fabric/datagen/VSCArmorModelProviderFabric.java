@@ -13,7 +13,7 @@ public class VSCArmorModelProviderFabric extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        VSCArmorModelProvider.createSimpleModels(blockStateModelGenerator);
+        VSCArmorModelProvider.generateModels(blockStateModelGenerator);
     }
 
     @Override

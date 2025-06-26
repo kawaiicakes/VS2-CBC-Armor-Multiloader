@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/inner_vertical_stairs_bottom",
-  "textures": {
-    "bottom": "vscarmor:block/magenta_reinforced_armor",
-    "side": "vscarmor:block/magenta_reinforced_armor",
-    "top": "vscarmor:block/magenta_reinforced_armor"
-  }
-}

@@ -1,8 +1,8 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
-import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
-import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
+import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
+import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -38,9 +38,7 @@ public class VSCArmorBlockTagProvider extends BlockTagsProvider {
                 beaconBase.addElement(Registry.BLOCK.getKey(block));
             }
 
-            String blockPath = Registry.BLOCK.getKey(block).getPath();
-
-            String grade = getGrade(blockPath);
+            String grade = ((ColorableBlock) block).getGrade().getSerializedName();
 
             TagBuilder gradeTag = getOrCreateRawBuilder(
                     TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(MOD_ID, grade))
@@ -56,37 +54,8 @@ public class VSCArmorBlockTagProvider extends BlockTagsProvider {
         }
     }
 
-    public static String getGrade(String blockPath) {
-        String grade;
-
-        if (blockPath.contains("light_armor")) grade = "light_armor";
-        else if (blockPath.contains("steel_armor")) grade = "steel_armor";
-        else if (blockPath.contains("composite_armor")) grade = "composite_armor";
-        else grade = "reinforced_armor";
-
-        // looks for vertical and horizontal too instead of just window in prep for full window block
-        if (blockPath.contains("vertical_window") || blockPath.contains("horizontal_window"))
-            grade += "_window_slits";
-
-        if (blockPath.contains("porthole"))
-            grade += "_porthole";
-
-        if (blockPath.contains("slab"))
-            grade += "_slab";
-        else if (blockPath.contains("stairs"))
-            grade += "_stairs";
-        else if (blockPath.contains("fence"))
-            grade += "_fence";
-        else if (blockPath.contains("wall"))
-            grade += "_wall";
-        return grade;
-    }
-
     public static boolean isFullBlock(Block block) {
-        return !(block instanceof SlabBlock)
-                && !(block instanceof VerticalSlabBlock)
-                && !(block instanceof StairBlock)
-                && !(block instanceof VerticalStairsBlock);
+        return block instanceof ArmorBlock;
     }
 
     public static boolean isWall(Block block) {

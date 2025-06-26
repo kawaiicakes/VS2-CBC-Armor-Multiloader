@@ -3,6 +3,7 @@ package io.github.kawaiicakes.vscarmor.datagen;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
+import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -55,43 +56,8 @@ public class ValkyrienSkiesPropertyProvider implements DataProvider {
     }
 
     public static double getMass(Block block) {
-        double reinforcedMass = 4312;
-        double compositeMass = 2744;
-        double steelMass = 1176;
-        double lightMass = 392;
-
-        String blockPath = Registry.BLOCK.getKey(block).getPath();
-
-        final double glassWeight = 200;
-        double multiplier = 1;
-        double glassMultiplier = 0;
-        final double grade;
-
-        if (blockPath.contains("light_armor")) grade = lightMass;
-        else if (blockPath.contains("steel_armor")) grade = steelMass;
-        else if (blockPath.contains("composite_armor")) grade = compositeMass;
-        else grade = reinforcedMass;
-
-        if (blockPath.contains("porthole")) {
-            multiplier = 0.75;
-            glassMultiplier = 0.25;
-        }
-        // looks for vertical and horizontal too instead of just window in prep for full window block
-        else if (blockPath.contains("vertical_window") || blockPath.contains("horizontal_window")) {
-            multiplier = 0.4375;
-            glassMultiplier = 0.5625;
-        }
-
-        if (blockPath.contains("slab"))
-            multiplier *= 0.5;
-        else if (blockPath.contains("stairs"))
-            multiplier *= 0.75;
-        else if (blockPath.contains("fence"))
-            multiplier = 0.0625;
-        else if (blockPath.contains("wall"))
-            multiplier = 0.25;
-
-        return (grade * multiplier) + (glassWeight * glassMultiplier);
+        ColorableBlock colorableBlock = ((ColorableBlock) block);
+        return colorableBlock.getGrade().getMass() * colorableBlock.getType().getPropertyMultiplier();
     }
 
     @Override

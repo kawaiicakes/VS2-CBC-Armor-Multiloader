@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/template_wall_side_tall",
-  "textures": {
-    "bottom": "vscarmor:block/black_composite_armor",
-    "side": "vscarmor:block/wl_green_composite_armor",
-    "top": "vscarmor:block/green_composite_armor"
-  }
-}

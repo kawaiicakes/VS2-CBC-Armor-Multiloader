@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/horizontal_window_slab_top",
-  "textures": {
-    "bottom": "vscarmor:block/red_light_armor",
-    "side": "vscarmor:block/red_light_armor",
-    "top": "vscarmor:block/red_light_armor"
-  }
-}

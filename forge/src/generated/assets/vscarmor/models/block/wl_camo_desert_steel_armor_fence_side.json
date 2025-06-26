@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/fence_side",
-  "textures": {
-    "bottom": "vscarmor:block/black_steel_armor",
-    "texture": "vscarmor:block/wl_camo_desert_steel_armor",
-    "top": "vscarmor:block/camo_desert_steel_armor"
-  }
-}

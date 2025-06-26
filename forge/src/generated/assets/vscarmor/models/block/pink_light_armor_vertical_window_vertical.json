@@ -1,8 +1,0 @@
-{
-  "parent": "vscarmor:block/vertical_window_vertical",
-  "textures": {
-    "bottom": "vscarmor:block/pink_light_armor",
-    "side": "vscarmor:block/pink_light_armor",
-    "top": "vscarmor:block/pink_light_armor"
-  }
-}
