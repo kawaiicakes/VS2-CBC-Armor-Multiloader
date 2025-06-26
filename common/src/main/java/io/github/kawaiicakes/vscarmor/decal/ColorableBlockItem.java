@@ -1,5 +1,6 @@
 package io.github.kawaiicakes.vscarmor.decal;
 
+import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -14,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 public class ColorableBlockItem extends BlockItem {
-    public ColorableBlockItem(Block block, Properties properties) {
-        super(block, properties);
+    public ColorableBlockItem(Block block) {
+        super(block, VSCArmorExpectPlatform.withTab(new Properties()));
     }
 
     @Override

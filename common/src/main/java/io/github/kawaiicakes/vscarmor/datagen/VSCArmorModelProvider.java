@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
-import io.github.kawaiicakes.vscarmor.block.Grades;
+import io.github.kawaiicakes.vscarmor.block.Grade;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
 import io.github.kawaiicakes.vscarmor.client.model.ArmorBlockModels;
@@ -44,7 +44,7 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
     }
 
     public static void createSimpleModels(BlockModelGenerators generator) {
-        for (Grades grade : Grades.values()) {
+        for (Grade grade : Grade.values()) {
             String pattern = grade.getSerializedName();
             ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
 
@@ -231,8 +231,8 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
     }
 
     /**
-     * @param pattern also makes a reference to the base block.
-     * @param mapFunction this method passes the base block to {@code Function<Block, TextureMapping>#apply}.
+     * @param pattern also makes a reference to the properties block.
+     * @param mapFunction this method passes the properties block to {@code Function<Block, TextureMapping>#apply}.
      */
     public static void createWindow(
             String windowSuffix,

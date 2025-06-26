@@ -42,9 +42,9 @@ public class VSCArmorForge {
 
     public VSCArmorForge() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        VSCArmor.init();
-
         VSCArmorRegistryImpl.register(eventBus);
+
+        VSCArmor.init();
 
         eventBus.addListener(this::gatherData);
     }

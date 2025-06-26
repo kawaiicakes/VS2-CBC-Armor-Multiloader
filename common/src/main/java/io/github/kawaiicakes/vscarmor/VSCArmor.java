@@ -3,16 +3,18 @@ package io.github.kawaiicakes.vscarmor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// TODO - Group blocks by Grade
 // TODO - Models should specify tint indexes
 // TODO - Clean up datagen
 // TODO - Clean up registration (also, registry expect platforms should hold a list of blocks/items w/ a search method)
 // TODO - Register block items with blocks automagically
 // TODO - Redo Pattern system
-// TODO - Grades should use method taking a float or something rather than #base, #quarter, etc.
+// TODO - Grade should use method taking a float or something rather than #properties, #quarter, etc.
 // TODO - Cleanup unused window breaking shit for now. It's an eyesore for development. In the future, maybe replace it
 //  with anonymous implementations of the abstract instead since it only needs a few overrides for hitbox stuff
 // TODO - Update README with new 2.0.0 system
 // TODO - Add warnings for users with existing worlds / add an automatic replacement system
+// TODO - Replace slab & vslab with slab that does both
 
 // TODO (2.0) - Eighths
 // TODO (2.0) - Reactive armour
@@ -40,5 +42,7 @@ public class VSCArmor {
                 NAME,
                 VSCArmorExpectPlatform.platformName()
         );
+
+        VSCArmorRegistry.registerBlocksAndItems();
     }
 }
