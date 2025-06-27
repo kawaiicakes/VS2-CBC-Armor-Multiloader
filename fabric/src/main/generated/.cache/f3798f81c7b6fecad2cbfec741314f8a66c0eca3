@@ -1,4 +1,4 @@
-// 1.19.2	2025-06-26T17:57:21.2351352	Models
+// 1.19.2	2025-06-26T18:07:47.2172317	Models
 383ceb1d1b2639999a9ea45ef862f3dbb563e755 assets\vscarmor\models\block\bush_light_armor.json
 5cc5f4ec04afec3939b22a50a44db9e8e195c43e assets\vscarmor\models\item\desert_reinforced_armor.json
 b27d213eb0d06150131f95f8e29e3fbab522ae9e assets\vscarmor\models\item\forest_steel_armor.json
@@ -74,8 +74,8 @@ c1c7d05d17363f2009fabaf9de2970ea1e78f120 assets\vscarmor\models\item\forest_comp
 929f4621689817bdc1fba700843e88f1c8ca8608 assets\vscarmor\models\item\bush_composite_armor.json
 3413e9a760cbe6990363b00d94673c1111ad98e4 assets\vscarmor\models\block\desert_reinforced_armor.json
 872bd78e7be7e9aabdb3d5768a9228564fcfa3bf assets\vscarmor\models\item\woodland_polygon_reinforced_armor.json
-a78a26fbb2854a7dd951b051c2b03dcf9ed4f3c0 assets\vscarmor\blockstates\desert_light_armor.json
 e5a1d6f6e633316b5124ccc1257f9572512f2e99 assets\vscarmor\blockstates\arctic_reinforced_armor.json
+a78a26fbb2854a7dd951b051c2b03dcf9ed4f3c0 assets\vscarmor\blockstates\desert_light_armor.json
 54271dfeb30ac2df9269eeefcfe63ca0b5275ea1 assets\vscarmor\models\item\bush_light_armor.json
 4c58dfa3d6b5798ecf8289294eed4e93aa3043ba assets\vscarmor\models\item\woodland_polygon_light_armor.json
 9c63032cc284266a0c4671d197ab3cc7ed1d93a3 assets\vscarmor\blockstates\woodland_polygon_light_armor.json

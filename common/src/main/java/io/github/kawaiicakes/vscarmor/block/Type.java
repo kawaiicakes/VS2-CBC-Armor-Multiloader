@@ -32,6 +32,7 @@ public enum Type implements StringRepresentable {
     @SuppressWarnings("deprecation")
     public String asPrettySuffix() {
         if (this.equals(VSTAIRS)) return " Vertical Stairs";
+        if (this.equals(BLOCK)) return "";
         return " " + WordUtils.capitalize(this.getSerializedName());
     }
 

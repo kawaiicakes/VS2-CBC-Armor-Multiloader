@@ -35,8 +35,8 @@ public enum Pattern implements StringRepresentable {
     public String asPrettyPrefix() {
         String toReturn = this.getSerializedName();
 
-        if (this.isCamo) toReturn = toReturn + " Camo";
+        if (this.isCamo) toReturn = toReturn.replace("_", " ") + " Camo";
 
-        return this.equals(NONE) ? "" : WordUtils.capitalize(toReturn.replace("_", "")) + " ";
+        return this.equals(NONE) ? "" : WordUtils.capitalize(toReturn) + " ";
     }
 }
