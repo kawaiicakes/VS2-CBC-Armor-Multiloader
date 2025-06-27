@@ -44,10 +44,6 @@ repositories {
 
     maven { url = "https://api.modrinth.com/maven" } // LazyDFU
     maven { url = "https://maven.terraformersmc.com/releases" } // Mod Menu, EMI
-
-    maven {
-        url = "https://modmaven.dev/com/jozufozu/flywheel/" // since github actions gradle wants to be a silly goose
-    }
 }
 
 configurations.configureEach {
