@@ -1,8 +1,9 @@
-package io.github.kawaiicakes.vscarmor.block;
+package io.github.kawaiicakes.vscarmor.armor;
 
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jetbrains.annotations.NotNull;
 
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
@@ -39,7 +40,7 @@ public enum Grade implements StringRepresentable {
 	}
 
 	@Override
-	public String getSerializedName() {
+	public @NotNull String getSerializedName() {
 		return this.name;
 	}
 

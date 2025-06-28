@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.vscarmor.decal;
+package io.github.kawaiicakes.vscarmor.armor;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import net.minecraft.core.NonNullList;

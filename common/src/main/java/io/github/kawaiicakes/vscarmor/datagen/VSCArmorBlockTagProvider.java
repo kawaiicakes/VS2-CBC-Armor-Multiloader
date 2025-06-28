@@ -2,7 +2,7 @@ package io.github.kawaiicakes.vscarmor.datagen;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;

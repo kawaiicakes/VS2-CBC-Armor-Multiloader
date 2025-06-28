@@ -215,6 +215,38 @@ public class ArmorBlockModels {
             MOD_ID, "fence_post", "_post",
             TextureSlot.TEXTURE, TextureSlot.TOP, TextureSlot.BOTTOM
     );
+    public static final ModelTemplate U_SLAB = block(
+            "universal_slab",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_STRAIGHT = block(
+            "vertical_stairs",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_INNER_BOTTOM = block(
+            "inner_vertical_stairs_bottom", "_inner_bottom",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_INNER_TOP = block(
+            "inner_vertical_stairs_top", "_inner_top",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_OUTER_RIGHT_BOTTOM = block(
+            "outer_vertical_stairs_right_bottom", "_outer_right_bottom",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_OUTER_RIGHT_TOP = block(
+            "outer_vertical_stairs_right_top", "_outer_right_top",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_OUTER_LEFT_BOTTOM = block(
+            "outer_vertical_stairs_left_bottom", "_outer_left_bottom",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
+    public static final ModelTemplate V_STAIRS_OUTER_LEFT_TOP = block(
+            "outer_vertical_stairs_left_top", "_outer_left_top",
+            TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE
+    );
 
     private static ModelTemplate block(String namespace, String parent, String variant, TextureSlot... requiredTextureSlots) {
         return new ModelTemplate(
@@ -224,11 +256,19 @@ public class ArmorBlockModels {
         );
     }
 
-    private static ModelTemplate block(String namespace, String parent, TextureSlot... requiredTextureSlots) {
+    private static ModelTemplate block(String parent, TextureSlot... requiredTextureKeys) {
         return new ModelTemplate(
-                Optional.of(new ResourceLocation(namespace, "block/" + parent)),
+                Optional.of(new ResourceLocation(MOD_ID, "block/" + parent)),
                 Optional.empty(),
-                requiredTextureSlots
+                requiredTextureKeys
+        );
+    }
+
+    private static ModelTemplate block(String parent, String variant, TextureSlot... requiredTextureKeys) {
+        return new ModelTemplate(
+                Optional.of(new ResourceLocation(MOD_ID, "block/" + parent)),
+                Optional.of(variant),
+                requiredTextureKeys
         );
     }
 }

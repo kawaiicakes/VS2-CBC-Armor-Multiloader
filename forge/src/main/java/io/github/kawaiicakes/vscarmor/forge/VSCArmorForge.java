@@ -3,7 +3,7 @@ package io.github.kawaiicakes.vscarmor.forge;
 import io.github.kawaiicakes.vscarmor.*;
 import io.github.kawaiicakes.vscarmor.datagen.VSCArmorLangProvider;
 import io.github.kawaiicakes.vscarmor.datagen.ValkyrienSkiesPropertyProvider;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlockEntity;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
 import io.github.kawaiicakes.vscarmor.forge.datagen.VSCArmorBlockLootForge;
 import io.github.kawaiicakes.vscarmor.forge.datagen.VSCArmorBlockTagsForge;
 import io.github.kawaiicakes.vscarmor.forge.datagen.VSCArmorModelProviderForge;

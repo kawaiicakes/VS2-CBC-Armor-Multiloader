@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.vscarmor.block;
+package io.github.kawaiicakes.vscarmor.armor;
 
 import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.text.WordUtils;

@@ -1,17 +1,16 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
-import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
+import io.github.kawaiicakes.vscarmor.block.UniversalSlabBlock;
 import io.github.kawaiicakes.vscarmor.block.VerticalStairsBlock;
-import io.github.kawaiicakes.vscarmor.client.model.VerticalModels;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
+import io.github.kawaiicakes.vscarmor.client.model.ArmorBlockModels;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ModelProvider;
 import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
@@ -81,7 +80,7 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
                     .stairs(stairsBlock)
                     .wall(wallBlock);
 
-            createVerticalSlab(
+            createUniversalSlab(
                     generator,
                     pattern,
                     VSCArmorModelProvider::sideTopBottomSimple
@@ -175,22 +174,22 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
          */
     }
 
-    public static void createVerticalSlab(
+    public static void createUniversalSlab(
             BlockModelGenerators generator, String pattern, Function<Block, TextureMapping> mapFunction
     ) {
         ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
         Block baseBlock = Registry.BLOCK.get(baseBlockId);
         Block vSlabBlock = Registry.BLOCK.get(
-                withSuffixedPath(baseBlockId, "_vertical_slab")
+                withSuffixedPath(baseBlockId, "_universal_slab")
         );
 
         TextureMapping map = mapFunction.apply(baseBlock);
 
         ResourceLocation baseModelId = TextureMapping.getBlockTexture(baseBlock);
-        ResourceLocation vSlabBlockModelId = VerticalModels.V_SLAB.create(vSlabBlock, map, generator.modelOutput);
+        ResourceLocation vSlabBlockModelId = ArmorBlockModels.U_SLAB.create(vSlabBlock, map, generator.modelOutput);
 
         generator.blockStateOutput.accept(
-                createVerticalSlabBlockstate(vSlabBlock, vSlabBlockModelId, baseModelId)
+                createUniversalSlabBlockstate(vSlabBlock, vSlabBlockModelId, baseModelId)
         );
 
         generator.delegateItemModel(vSlabBlock, vSlabBlockModelId);
@@ -207,25 +206,25 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
 
         TextureMapping map = mapFunction.apply(baseBlock);
 
-        ResourceLocation regularModelId = VerticalModels.V_STAIRS_STRAIGHT
+        ResourceLocation regularModelId = ArmorBlockModels.V_STAIRS_STRAIGHT
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation innerModelBottomId = VerticalModels.V_STAIRS_INNER_BOTTOM
+        ResourceLocation innerModelBottomId = ArmorBlockModels.V_STAIRS_INNER_BOTTOM
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation innerModelTopId = VerticalModels.V_STAIRS_INNER_TOP
+        ResourceLocation innerModelTopId = ArmorBlockModels.V_STAIRS_INNER_TOP
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation outerModelRightBottomId = VerticalModels.V_STAIRS_OUTER_RIGHT_BOTTOM
+        ResourceLocation outerModelRightBottomId = ArmorBlockModels.V_STAIRS_OUTER_RIGHT_BOTTOM
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation outerModelRightTopId = VerticalModels.V_STAIRS_OUTER_RIGHT_TOP
+        ResourceLocation outerModelRightTopId = ArmorBlockModels.V_STAIRS_OUTER_RIGHT_TOP
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation outerModelLeftBottomId = VerticalModels.V_STAIRS_OUTER_LEFT_BOTTOM
+        ResourceLocation outerModelLeftBottomId = ArmorBlockModels.V_STAIRS_OUTER_LEFT_BOTTOM
                 .create(vStairsBlock, map, generator.modelOutput);
 
-        ResourceLocation outerModelLeftTopId = VerticalModels.V_STAIRS_OUTER_LEFT_TOP
+        ResourceLocation outerModelLeftTopId = ArmorBlockModels.V_STAIRS_OUTER_LEFT_TOP
                 .create(vStairsBlock, map, generator.modelOutput);
 
         generator.blockStateOutput.accept(
@@ -239,156 +238,62 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
         generator.delegateItemModel(vStairsBlock, regularModelId);
     }
 
-    /**
-     * @param pattern also makes a reference to the properties block.
-     * @param mapFunction this method passes the properties block to {@code Function<Block, TextureMapping>#apply}.
-     */
-    public static void createWindow(
-            String windowSuffix,
-            BlockModelGenerators generator, String pattern, Function<Block, TextureMapping> mapFunction,
-            ModelTemplate windowBase, ModelTemplate emptyWindow, 
-            ModelTemplate verticalWindow, ModelTemplate emptyVerticalWindow
+    public static BlockStateGenerator createUniversalSlabBlockstate(
+            Block slab, ResourceLocation slabBlockModelId, ResourceLocation baseModelId
     ) {
-        ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
-        Block baseBlock = Registry.BLOCK.get(baseBlockId);
-        Block portholeBlock = Registry.BLOCK.get(
-                withSuffixedPath(baseBlockId, windowSuffix)
-        );
-        ResourceLocation blockModelId = windowBase.create(
-                portholeBlock, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation emptyBlockModelId = emptyWindow.create(
-                portholeBlock, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation verticalBlockModelId = verticalWindow.create(
-                portholeBlock, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation verticalEmptyBlockModelId = emptyVerticalWindow.create(
-                portholeBlock, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-
-        generator.blockStateOutput.accept(
-                createWindowBlockstate(
-                        portholeBlock,
-                        blockModelId, emptyBlockModelId,
-                        verticalBlockModelId, verticalEmptyBlockModelId
-                )
-        );
-
-        generator.delegateItemModel(portholeBlock, blockModelId);
-    }
-
-    public static void createWindowSlab(
-            String windowSuffix, String suffix2,
-            BlockModelGenerators generator, String pattern, Function<Block, TextureMapping> mapFunction,
-            ModelTemplate windowBase, ModelTemplate emptyWindow, ModelTemplate topWindow, ModelTemplate emptyTopWindow
-    ) {
-        ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
-        Block baseBlock = Registry.BLOCK.get(baseBlockId);
-        Block portholeSlab = Registry.BLOCK.get(
-                withSuffixedPath(baseBlockId, windowSuffix)
-        );
-
-
-        ResourceLocation portholeDoubleModelId = TextureMapping.getBlockTexture(baseBlock, suffix2);
-
-        ResourceLocation portholeDoubleEmptyModelId = TextureMapping.getBlockTexture(
-                baseBlock, 
-                suffix2 + "_empty"
-        );
-
-        ResourceLocation portholeSlabModelId = windowBase.create(
-                portholeSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation portholeSlabEmptyModelId = emptyWindow.create(
-                portholeSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation portholeSlabTopModelId = topWindow.create(
-                portholeSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation portholeSlabTopEmptyModelId = emptyTopWindow.create(
-                portholeSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-
-        generator.blockStateOutput.accept(
-                createWindowSlabBlockstate(
-                        portholeSlab,
-                        portholeDoubleModelId, portholeDoubleEmptyModelId,
-                        portholeSlabModelId, portholeSlabEmptyModelId,
-                        portholeSlabTopModelId, portholeSlabTopEmptyModelId
-                )
-        );
-        
-        generator.delegateItemModel(portholeSlab, portholeSlabModelId);
-    }
-
-    public static void createWindowVerticalSlab(
-            String windowSuffix, String suffix2,
-            BlockModelGenerators generator, String pattern, Function<Block, TextureMapping> mapFunction,
-            ModelTemplate windowSlabModelId, ModelTemplate emptyWindowSlabModelId
-    ) {
-        ResourceLocation baseBlockId = new ResourceLocation(MOD_ID, pattern);
-        Block baseBlock = Registry.BLOCK.get(baseBlockId);
-        Block portholeVSlab = Registry.BLOCK.get(
-                new ResourceLocation(baseBlockId.getNamespace(), baseBlockId.getPath() + windowSuffix)
-        );
-
-        ResourceLocation portholeDoubleModelId = TextureMapping.getBlockTexture(baseBlock, suffix2);
-        ResourceLocation portholeDoubleEmptyModelId = TextureMapping.getBlockTexture(
-                        baseBlock, 
-                        suffix2 + "_empty"
-                );
-
-        ResourceLocation portholeSlabModelId = windowSlabModelId.create(
-                portholeVSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-        ResourceLocation portholeSlabEmptyModelId = emptyWindowSlabModelId.create(
-                portholeVSlab, mapFunction.apply(baseBlock), generator.modelOutput
-        );
-
-        generator.blockStateOutput.accept(
-                createWindowVerticalSlabBlockstate(
-                        portholeVSlab,
-                        portholeSlabModelId, portholeSlabEmptyModelId,
-                        portholeDoubleModelId, portholeDoubleEmptyModelId
-                )
-        );
-
-        generator.delegateItemModel(portholeVSlab, portholeSlabModelId);
-    }
-
-    public static BlockStateGenerator createVerticalSlabBlockstate(
-            Block vSlabBlock, ResourceLocation vSlabBlockModelId, ResourceLocation baseModelId
-    ) {
-        return MultiVariantGenerator.multiVariant(vSlabBlock)
+        return MultiVariantGenerator.multiVariant(slab)
                 .with(
                         PropertyDispatch
-                                .properties(BlockStateProperties.HORIZONTAL_FACING, VerticalSlabBlock.DOUBLET)
+                                .properties(BlockStateProperties.HORIZONTAL_FACING, UniversalSlabBlock.DOUBLET)
+                                .select(
+                                        Direction.UP, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
                                 .select(
                                         Direction.EAST, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, vSlabBlockModelId)
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
                                 )
                                 .select(
                                         Direction.SOUTH, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, vSlabBlockModelId)
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
                                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
                                 )
                                 .select(
                                         Direction.WEST, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, vSlabBlockModelId)
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
                                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
                                 )
                                 .select(
                                         Direction.NORTH, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, vSlabBlockModelId)
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
                                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.UP, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
                                 )
                                 .select(
                                         Direction.EAST, Boolean.TRUE,
@@ -839,7 +744,7 @@ public abstract class VSCArmorModelProvider extends ModelProvider {
         return MultiVariantGenerator.multiVariant(vSlabBlock)
                 .with(
                         PropertyDispatch
-                                .properties(BlockStateProperties.HORIZONTAL_FACING, VerticalSlabBlock.DOUBLET)
+                                .properties(BlockStateProperties.HORIZONTAL_FACING, UniversalSlabBlock.DOUBLET)
                                 .select(
                                         Direction.EAST, Boolean.FALSE,
                                         Variant.variant()

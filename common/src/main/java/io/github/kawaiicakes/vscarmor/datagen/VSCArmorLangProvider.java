@@ -3,7 +3,7 @@ package io.github.kawaiicakes.vscarmor.datagen;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlock;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlock;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;

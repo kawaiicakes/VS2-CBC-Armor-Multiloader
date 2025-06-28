@@ -8,7 +8,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 @SuppressWarnings("deprecation")
-public class VerticalSlabBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty DOUBLET = BooleanProperty.create("doublet");
     public static final VoxelShape NORTH = Block.box(
             0.0, 0.0, 0.0,
@@ -43,12 +43,14 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
             0.0, 0.0, 0.0,
             8.0, 16.0, 16.0
     );
+    public static final VoxelShape UP = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
+    public static final VoxelShape DOWN = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
-    public VerticalSlabBlock(Properties settings) {
+    public UniversalSlabBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(
                 this.defaultBlockState()
-                        .setValue(FACING, Direction.SOUTH)
+                        .setValue(FACING, Direction.DOWN)
                         .setValue(DOUBLET, Boolean.FALSE)
                         .setValue(WATERLOGGED, Boolean.FALSE)
         );
@@ -69,11 +71,12 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
         return state.getValue(DOUBLET)
                 ? Shapes.block()
                 : switch (state.getValue(FACING)) {
-                        case DOWN, UP -> throw new IllegalStateException();
                         case NORTH -> NORTH;
                         case SOUTH -> SOUTH;
                         case WEST -> WEST;
                         case EAST -> EAST;
+                        case UP -> UP;
+                        case DOWN -> DOWN;
                 };
     }
 
@@ -91,13 +94,33 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
                     .setValue(DOUBLET, Boolean.FALSE)
                     .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 
-            return ctx.getHorizontalDirection().getAxis() == Direction.Axis.X
-                    ? ctx.getClickLocation().x - (double) ctx.getClickedPos().getX() > 0.5
-                            ? blockState2.setValue(FACING, Direction.EAST)
-                            : blockState2.setValue(FACING, Direction.WEST)
-                    : ctx.getClickLocation().z - (double) ctx.getClickedPos().getZ() > 0.5
-                            ? blockState2.setValue(FACING, Direction.SOUTH)
-                            : blockState2.setValue(FACING, Direction.NORTH);
+            // TODO - tweak and complete this behaviour
+            boolean isUp = (ctx.getClickLocation().y - ctx.getClickedPos().getY()) > 0.5;
+            double horizontalCoordOnBlock;
+            final double oneThird = (double) 1 / 3;
+            final double twoThirds = (double) 2 / 3;
+
+            if (ctx.getHorizontalDirection().getAxis() == Direction.Axis.X) {
+                horizontalCoordOnBlock = ctx.getClickLocation().x - (double) ctx.getClickedPos().getX();
+
+                if (horizontalCoordOnBlock < oneThird) {
+                    return blockState2.setValue(FACING, Direction.WEST);
+                } else if (horizontalCoordOnBlock >= oneThird && horizontalCoordOnBlock < twoThirds) {
+                    return blockState2.setValue(FACING, isUp ? Direction.UP : Direction.DOWN);
+                } else {
+                    return blockState2.setValue(FACING, Direction.EAST);
+                }
+            } else {
+                horizontalCoordOnBlock = ctx.getClickLocation().z - (double) ctx.getClickedPos().getZ();
+
+                if (horizontalCoordOnBlock < oneThird) {
+                    return blockState2.setValue(FACING, Direction.NORTH);
+                } else if (horizontalCoordOnBlock >= oneThird && horizontalCoordOnBlock < twoThirds) {
+                    return blockState2.setValue(FACING, isUp ? Direction.UP : Direction.DOWN);
+                } else {
+                    return blockState2.setValue(FACING, Direction.SOUTH);
+                }
+            }
         }
     }
 
@@ -123,14 +146,12 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
 
     @Override
     public boolean placeLiquid(LevelAccessor pLevel, BlockPos pPos, BlockState pState, FluidState pFluidState) {
-        return pState.getValue(DOUBLET) != Boolean.TRUE
-                && SimpleWaterloggedBlock.super.placeLiquid(pLevel, pPos, pState, pFluidState);
+        return !pState.getValue(DOUBLET) && SimpleWaterloggedBlock.super.placeLiquid(pLevel, pPos, pState, pFluidState);
     }
 
     @Override
     public boolean canPlaceLiquid(BlockGetter pLevel, BlockPos pPos, BlockState pState, Fluid pFluid) {
-        return pState.getValue(DOUBLET) != Boolean.TRUE
-                && SimpleWaterloggedBlock.super.canPlaceLiquid(pLevel, pPos, pState, pFluid);
+        return !pState.getValue(DOUBLET) && SimpleWaterloggedBlock.super.canPlaceLiquid(pLevel, pPos, pState, pFluid);
     }
 
     @Override

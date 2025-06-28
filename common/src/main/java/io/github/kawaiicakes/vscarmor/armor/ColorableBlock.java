@@ -1,8 +1,5 @@
-package io.github.kawaiicakes.vscarmor.decal;
+package io.github.kawaiicakes.vscarmor.armor;
 
-import io.github.kawaiicakes.vscarmor.block.Grade;
-import io.github.kawaiicakes.vscarmor.block.Pattern;
-import io.github.kawaiicakes.vscarmor.block.Type;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

@@ -2,8 +2,8 @@ package io.github.kawaiicakes.vscarmor.forge;
 
 import io.github.kawaiicakes.vscarmor.VSCArmor;
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlockEntity;
-import io.github.kawaiicakes.vscarmor.decal.ColorableBlockItem;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlockItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

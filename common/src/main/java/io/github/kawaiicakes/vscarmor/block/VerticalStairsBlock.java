@@ -48,22 +48,22 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
     };
 
     protected static final VoxelShape[] NORTH_SHAPES = makeShapes(
-            VerticalSlabBlock.NORTH, OCTET_PNP, OCTET_PPP,
+            UniversalSlabBlock.NORTH, OCTET_PNP, OCTET_PPP,
             OCTET_NNP, OCTET_NPP
     );
 
     protected static final VoxelShape[] EAST_SHAPES = makeShapes(
-            VerticalSlabBlock.EAST, OCTET_NNP, OCTET_NPP,
+            UniversalSlabBlock.EAST, OCTET_NNP, OCTET_NPP,
             OCTET_NNN, OCTET_NPN
     );
 
     protected static final VoxelShape[] SOUTH_SHAPES = makeShapes(
-            VerticalSlabBlock.SOUTH, OCTET_NNN, OCTET_NPN,
+            UniversalSlabBlock.SOUTH, OCTET_NNN, OCTET_NPN,
             OCTET_PNN, OCTET_PPN
     );
 
     protected static final VoxelShape[] WEST_SHAPES = makeShapes(
-            VerticalSlabBlock.WEST, OCTET_PNN, OCTET_PPN,
+            UniversalSlabBlock.WEST, OCTET_PNN, OCTET_PPN,
             OCTET_PNP, OCTET_PPP
     );
 
