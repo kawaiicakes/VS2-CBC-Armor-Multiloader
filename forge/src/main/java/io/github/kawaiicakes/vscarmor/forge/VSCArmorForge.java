@@ -31,10 +31,37 @@ import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
 @Mod(MOD_ID)
 public class VSCArmorForge {
-    public static final CreativeModeTab TAB = new CreativeModeTab("vscarmor_group") {
+    public static final CreativeModeTab LIGHT_TAB = new CreativeModeTab("vscarmor.light_armor") {
         @Override
         public @NotNull ItemStack makeIcon() {
             return RegistryObject.create(new ResourceLocation(MOD_ID, "light_armor"), ForgeRegistries.ITEMS)
+                    .get()
+                    .getDefaultInstance();
+        }
+    };
+
+    public static final CreativeModeTab STEEL_TAB = new CreativeModeTab("vscarmor.steel_armor") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return RegistryObject.create(new ResourceLocation(MOD_ID, "steel_armor"), ForgeRegistries.ITEMS)
+                    .get()
+                    .getDefaultInstance();
+        }
+    };
+
+    public static final CreativeModeTab COMPOSITE_TAB = new CreativeModeTab("vscarmor.composite_armor") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return RegistryObject.create(new ResourceLocation(MOD_ID, "composite_armor"), ForgeRegistries.ITEMS)
+                    .get()
+                    .getDefaultInstance();
+        }
+    };
+
+    public static final CreativeModeTab REINFORCED_TAB = new CreativeModeTab("vscarmor.reinforced_armor") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return RegistryObject.create(new ResourceLocation(MOD_ID, "reinforced_armor"), ForgeRegistries.ITEMS)
                     .get()
                     .getDefaultInstance();
         }

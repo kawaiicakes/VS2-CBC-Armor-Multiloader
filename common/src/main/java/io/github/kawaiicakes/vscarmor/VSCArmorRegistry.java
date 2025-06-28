@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-// TODO - Group blocks by Grade
 /**
  * Do not make calls to methods in this class unless you are sure registration has completed
  */

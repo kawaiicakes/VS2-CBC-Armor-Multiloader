@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 // TODO - Add warnings for users with existing worlds / add an automatic replacement system
 // TODO - Life preservers
 // TODO - Tooltip includes armour stats
+// TODO - item display names should dynamically account for colours to make searching easier
 // TODO - Continue registration system
 // TODO - recolorability info in pattern enum
 // TODO - Model cleanup

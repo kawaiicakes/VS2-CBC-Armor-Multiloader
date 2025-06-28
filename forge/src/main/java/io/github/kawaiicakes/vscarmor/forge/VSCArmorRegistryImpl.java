@@ -66,6 +66,7 @@ public class VSCArmorRegistryImpl {
             ITEMS.register(
                     entry.getKey(),
                     () -> new ColorableBlockItem(
+                            new Item.Properties(),
                             RegistryObject.create(
                                 new ResourceLocation(VSCArmor.MOD_ID, entry.getKey()),
                                 ForgeRegistries.BLOCKS

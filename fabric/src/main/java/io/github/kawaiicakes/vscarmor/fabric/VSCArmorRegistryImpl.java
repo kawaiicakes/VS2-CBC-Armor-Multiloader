@@ -6,6 +6,7 @@ import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockItem;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -45,7 +46,7 @@ public class VSCArmorRegistryImpl {
 
             register(BLOCK, entry.getKey(), block);
             MOD_BLOCKS.add(block);
-            register(ITEM, entry.getKey(), new ColorableBlockItem(block));
+            register(ITEM, entry.getKey(), new ColorableBlockItem(new Item.Properties(), block));
         }
     }
 }

@@ -15,8 +15,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 public class ColorableBlockItem extends BlockItem {
-    public ColorableBlockItem(Block block) {
-        super(block, VSCArmorExpectPlatform.withTab(new Properties()));
+    public ColorableBlockItem(Properties properties, Block block) {
+        super(block, VSCArmorExpectPlatform.withTab(properties, ((ColorableBlock) block).getGrade()));
     }
 
     @Override

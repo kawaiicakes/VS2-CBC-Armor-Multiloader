@@ -31,5 +31,8 @@
   "block.vscarmor.woodland_polygon_light_armor": "Woodland Polygon Camo Light Armor",
   "block.vscarmor.woodland_polygon_reinforced_armor": "Woodland Polygon Camo Reinforced Armor",
   "block.vscarmor.woodland_polygon_steel_armor": "Woodland Polygon Camo Steel Armor",
-  "itemGroup.vscarmor.vscarmor_group": "Armor Blocks"
+  "itemGroup.vscarmor.vscarmor.composite_armor": "Composite Armor",
+  "itemGroup.vscarmor.vscarmor.light_armor": "Light Armor",
+  "itemGroup.vscarmor.vscarmor.reinforced_armor": "Reinforced Armor",
+  "itemGroup.vscarmor.vscarmor.steel_armor": "Steel Armor"
 }

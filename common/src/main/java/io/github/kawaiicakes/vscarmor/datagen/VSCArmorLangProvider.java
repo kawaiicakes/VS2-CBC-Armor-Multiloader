@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlock;
+import io.github.kawaiicakes.vscarmor.armor.Grade;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -37,7 +38,9 @@ public class VSCArmorLangProvider implements DataProvider {
             translationBuilder.accept(block.getDescriptionId(), name);
         }
 
-        translationBuilder.accept(VSCArmorExpectPlatform.tabName(), "Armor Blocks");
+        for (Grade grade : Grade.values()) {
+            translationBuilder.accept(VSCArmorExpectPlatform.tabName(grade), grade.getDisplayName());
+        }
     }
 
     @Override
