@@ -1,8 +1,6 @@
 package io.github.kawaiicakes.vscarmor.datagen;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
-import io.github.kawaiicakes.vscarmor.block.AbstractWindowSlab;
-import io.github.kawaiicakes.vscarmor.block.AbstractWindowVerticalSlab;
 import io.github.kawaiicakes.vscarmor.block.VerticalSlabBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLoot;
@@ -45,16 +43,6 @@ public abstract class VSCArmorBlockLootTables {
 
             if (block instanceof VerticalSlabBlock verticalSlab) {
                 blockLoot.add(verticalSlab, verticalSlabDrops(verticalSlab));
-                continue;
-            }
-
-            if (block instanceof AbstractWindowVerticalSlab verticalSlab) {
-                blockLoot.add(verticalSlab, verticalSlabDrops(verticalSlab));
-                continue;
-            }
-
-            if (block instanceof AbstractWindowSlab verticalSlab) {
-                blockLoot.add(verticalSlab, createSlabItemTable(verticalSlab));
                 continue;
             }
 

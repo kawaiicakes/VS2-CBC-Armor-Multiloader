@@ -3,13 +3,13 @@ package io.github.kawaiicakes.vscarmor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO - Cleanup unused window breaking shit for now. It's an eyesore for development.
 // TODO - Update README with new 2.0.0 system
 // TODO - Add warnings for users with existing worlds / add an automatic replacement system
 // TODO - Replace slab & vslab with slab that does both
 
 // TODO - Life preservers
 // TODO - Tooltip includes armour stats
+// TODO - Continue registration system
 
 // TODO (2.1) - Eighths
 // TODO (2.1) - Reactive armour

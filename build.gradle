@@ -21,7 +21,7 @@ subprojects {
         maven { url = "https://maven.blamejared.com/" } // JEI
         maven { url = "https://maven.tterrag.com/" } // Flywheel on both, Create and Registrate on forge
         maven {
-            url = "https://modmaven.dev" // since github actions gradle wants to be a silly goose
+            url = "https://modmaven.dev" // according to iThundxr, tterag's maven blew up. use this instead
         }
     }
 

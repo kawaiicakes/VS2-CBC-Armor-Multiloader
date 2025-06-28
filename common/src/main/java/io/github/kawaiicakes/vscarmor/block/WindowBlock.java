@@ -25,4 +25,12 @@ public interface WindowBlock {
     default boolean isTransparent(BlockState state, BlockGetter world, BlockPos pos) {
         return true;
     }
+
+    /*
+    TODO - windows should implement #getVisualShape (getCameraCollisionShape on Fabric), #skipRendering
+        properties should also include these:
+        .isValidSpawn(if glass is not facing up)
+        .isViewBlocking(AbstractWindowBlock::ezPredicate)
+        .isSuffocating(AbstractWindowBlock::ezPredicate)
+     */
 }
