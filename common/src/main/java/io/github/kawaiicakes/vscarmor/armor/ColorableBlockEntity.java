@@ -2,7 +2,9 @@ package io.github.kawaiicakes.vscarmor.armor;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -12,12 +14,27 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
+// TODO - Store waterline BlockState as a boolean to allow switching item model accordingly
 public class ColorableBlockEntity extends BlockEntity {
     protected int mainColor = 0xFFFFFF;
     protected int waterlineColor = 0xFFFFFF;
+    protected List<Integer> layers;
+    protected ColorableBlock colorableBlock = null;
 
     public ColorableBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(VSCArmorRegistry.colorableBEType(), blockPos, blockState);
+
+        if (this.getBlockState().getBlock() instanceof ColorableBlock colorable) {
+            this.colorableBlock = colorable;
+
+            if (colorable.getPattern().getLayers() > 0) {
+                this.layers = NonNullList.createWithCapacity(colorable.getPattern().getLayers());
+            }
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -26,6 +43,9 @@ public class ColorableBlockEntity extends BlockEntity {
         CompoundTag vscarmor = new CompoundTag();
         vscarmor.putInt("body", this.mainColor);
         vscarmor.putInt("wl", this.waterlineColor);
+        if (this.layers != null) {
+            vscarmor.putIntArray("layers", this.layers);
+        }
         compoundTag.put("vscarmor", vscarmor);
     }
 
@@ -35,6 +55,15 @@ public class ColorableBlockEntity extends BlockEntity {
         CompoundTag vscarmor = compoundTag.getCompound("vscarmor");
         this.mainColor = vscarmor.getInt("body");
         this.waterlineColor = vscarmor.getInt("wl");
+
+        if (vscarmor.contains("layers", Tag.TAG_INT_ARRAY)) {
+            int[] layersArray = vscarmor.getIntArray("layers");
+            List<Integer> temp = NonNullList.createWithCapacity(layersArray.length);
+            for (int layer : layersArray) {
+                temp.add(layer);
+            }
+            this.layers = temp;
+        }
     }
 
     @Override
@@ -79,6 +108,17 @@ public class ColorableBlockEntity extends BlockEntity {
 
     public void setWaterlineColor(int waterlineColor) {
         this.waterlineColor = waterlineColor;
+        this.setChanged();
+    }
+
+    public int getLayerColor(byte layer) {
+        if (this.layers == null || this.layers.size() - 1 < layer) throw new IllegalArgumentException();
+        return this.layers.get(layer);
+    }
+
+    public void setLayerColor(byte layer, int color) {
+        if (this.layers == null || this.layers.size() - 1 < layer) throw new IllegalArgumentException();
+        this.layers.set(layer, color);
         this.setChanged();
     }
 }

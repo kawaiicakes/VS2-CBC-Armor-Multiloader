@@ -19,6 +19,7 @@ public class ColorableBlockItem extends BlockItem {
         super(block, VSCArmorExpectPlatform.withTab(properties, ((ColorableBlock) block).getGrade()));
     }
 
+    // FIXME - random order
     @Override
     @ParametersAreNonnullByDefault
     public void fillItemCategory(CreativeModeTab creativeModeTab, NonNullList<ItemStack> nonNullList) {

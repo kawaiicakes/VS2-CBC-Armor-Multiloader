@@ -18,8 +18,6 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-import static io.github.kawaiicakes.vscarmor.datagen.VSCArmorModelProvider.withPrefixedPath;
-
 public class VSCArmorModelProviderForge extends BlockStateProvider {
     protected final BlockModelGenerators blockDelegate = new BlockModelGenerators(
             (generator) -> this.registeredBlocks.put(generator.getBlock(), () -> generator.get().getAsJsonObject()),
@@ -84,5 +82,9 @@ public class VSCArmorModelProviderForge extends BlockStateProvider {
 
             return toReturn;
         }
+    }
+
+    public static ResourceLocation withPrefixedPath(ResourceLocation target, String prepend) {
+        return new ResourceLocation(target.getNamespace(), prepend + target.getPath());
     }
 }

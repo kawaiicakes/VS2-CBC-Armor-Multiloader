@@ -15,9 +15,15 @@ public enum Pattern implements StringRepresentable {
     RAINBOW(false);
 
     private final boolean isCamo;
+    private final byte layers;
 
     Pattern(boolean isCamo) {
+        this(isCamo, (byte) 0);
+    }
+
+    Pattern(boolean isCamo, byte layers) {
         this.isCamo = isCamo;
+        this.layers = layers;
     }
 
     @Override
@@ -38,5 +44,9 @@ public enum Pattern implements StringRepresentable {
         if (this.isCamo) toReturn = toReturn.replace("_", " ") + " Camo";
 
         return this.equals(NONE) ? "" : WordUtils.capitalize(toReturn) + " ";
+    }
+
+    public byte getLayers() {
+        return this.layers;
     }
 }

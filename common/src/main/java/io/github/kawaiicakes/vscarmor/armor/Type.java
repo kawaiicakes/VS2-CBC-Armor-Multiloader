@@ -2,6 +2,7 @@ package io.github.kawaiicakes.vscarmor.armor;
 
 import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jetbrains.annotations.NotNull;
 
 public enum Type implements StringRepresentable {
     BLOCK(1),
@@ -20,7 +21,7 @@ public enum Type implements StringRepresentable {
     }
 
     @Override
-    public String getSerializedName() {
+    public @NotNull String getSerializedName() {
         return this.equals(BLOCK) ? "" : this.toString().toLowerCase();
     }
 
