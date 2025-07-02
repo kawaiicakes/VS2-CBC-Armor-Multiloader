@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "vscarmor:block/desert_light_armor"
+    "waterline=false": {
+      "model": "vscarmor:block/desert_light_armor",
+      "uvlock": true
+    },
+    "waterline=true": {
+      "model": "vscarmor:block/desert_light_armor_waterline",
+      "uvlock": true
     }
   }
 }

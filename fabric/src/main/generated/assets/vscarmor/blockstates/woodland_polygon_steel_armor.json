@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "vscarmor:block/woodland_polygon_steel_armor"
+    "waterline=false": {
+      "model": "vscarmor:block/woodland_polygon_steel_armor",
+      "uvlock": true
+    },
+    "waterline=true": {
+      "model": "vscarmor:block/woodland_polygon_steel_armor_waterline",
+      "uvlock": true
     }
   }
 }

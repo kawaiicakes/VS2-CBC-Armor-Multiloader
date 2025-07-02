@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "vscarmor:block/bush_reinforced_armor"
+    "waterline=false": {
+      "model": "vscarmor:block/bush_reinforced_armor",
+      "uvlock": true
+    },
+    "waterline=true": {
+      "model": "vscarmor:block/bush_reinforced_armor_waterline",
+      "uvlock": true
     }
   }
 }

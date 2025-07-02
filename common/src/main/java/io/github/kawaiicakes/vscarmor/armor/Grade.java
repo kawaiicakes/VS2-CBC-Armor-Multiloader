@@ -1,5 +1,6 @@
 package io.github.kawaiicakes.vscarmor.armor;
 
+import io.github.kawaiicakes.vscarmor.datagen.VSCArmorModelProvider;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
@@ -119,10 +120,12 @@ public enum Grade implements StringRepresentable {
 	}
 
 	public TextureMapping getTextureMapping(ColorableBlock colorableBlock) {
-		return this.mapping.apply(colorableBlock.getPatternBaseTexture());
+		return this.mapping.apply(VSCArmorModelProvider.withPrefixedPath(
+				colorableBlock.getPatternBaseTexture(), "block/")
+		);
 	}
 
 	private static ResourceLocation waterline(String patternBase) {
-		return new ResourceLocation(MOD_ID, patternBase + "_waterline");
+		return new ResourceLocation(MOD_ID, "block/" + patternBase);
 	}
 }

@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "vscarmor:block/rainbow_composite_armor"
+    "waterline=false": {
+      "model": "vscarmor:block/rainbow_composite_armor",
+      "uvlock": true
+    },
+    "waterline=true": {
+      "model": "vscarmor:block/rainbow_composite_armor_waterline",
+      "uvlock": true
     }
   }
 }

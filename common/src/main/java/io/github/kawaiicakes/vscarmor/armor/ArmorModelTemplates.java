@@ -26,6 +26,11 @@ public class ArmorModelTemplates {
      */
     public static final ModelTemplate FULL_BLOCK = block(
             "basic_colorable",
+            TextureSlot.ALL
+    );
+
+    public static final ModelTemplate FULL_BLOCK_WL = block(
+            "basic_colorable_waterline",
             TextureSlot.ALL,
             ArmorTextureSlots.WATERLINE
     );

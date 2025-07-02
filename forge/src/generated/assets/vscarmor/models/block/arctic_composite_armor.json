@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "vscarmor:block/basic_colorable",
   "textures": {
     "all": "vscarmor:block/arctic_composite_armor"
   }

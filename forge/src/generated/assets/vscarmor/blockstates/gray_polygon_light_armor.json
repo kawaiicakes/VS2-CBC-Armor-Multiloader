@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "vscarmor:block/gray_polygon_light_armor"
+    "waterline=false": {
+      "model": "vscarmor:block/gray_polygon_light_armor",
+      "uvlock": true
+    },
+    "waterline=true": {
+      "model": "vscarmor:block/gray_polygon_light_armor_waterline",
+      "uvlock": true
     }
   }
 }
