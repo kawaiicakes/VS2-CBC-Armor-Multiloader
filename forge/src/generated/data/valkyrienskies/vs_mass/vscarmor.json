@@ -6,9 +6,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:desert_light_armor",
     "friction": 0.2,
     "mass": 392.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:desert_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
     "priority": 420
   },
   {
@@ -18,9 +30,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:forest_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:woodland_polygon_light_armor",
     "friction": 0.2,
     "mass": 392.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:woodland_polygon_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
     "priority": 420
   },
   {
@@ -30,9 +54,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:gray_polygon_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:bush_light_armor",
     "friction": 0.2,
     "mass": 392.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:bush_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
     "priority": 420
   },
   {
@@ -42,9 +78,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:arctic_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:rainbow_light_armor",
     "friction": 0.2,
     "mass": 392.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:rainbow_light_armor_slab",
+    "friction": 0.2,
+    "mass": 196.0,
     "priority": 420
   },
   {
@@ -54,9 +102,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:desert_steel_armor",
     "friction": 0.2,
     "mass": 1176.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:desert_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
     "priority": 420
   },
   {
@@ -66,9 +126,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:forest_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:woodland_polygon_steel_armor",
     "friction": 0.2,
     "mass": 1176.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:woodland_polygon_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
     "priority": 420
   },
   {
@@ -78,9 +150,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:gray_polygon_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:bush_steel_armor",
     "friction": 0.2,
     "mass": 1176.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:bush_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
     "priority": 420
   },
   {
@@ -90,9 +174,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:arctic_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:rainbow_steel_armor",
     "friction": 0.2,
     "mass": 1176.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:rainbow_steel_armor_slab",
+    "friction": 0.2,
+    "mass": 588.0,
     "priority": 420
   },
   {
@@ -102,9 +198,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:desert_composite_armor",
     "friction": 0.2,
     "mass": 2744.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:desert_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
     "priority": 420
   },
   {
@@ -114,9 +222,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:forest_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:woodland_polygon_composite_armor",
     "friction": 0.2,
     "mass": 2744.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:woodland_polygon_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
     "priority": 420
   },
   {
@@ -126,9 +246,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:gray_polygon_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:bush_composite_armor",
     "friction": 0.2,
     "mass": 2744.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:bush_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
     "priority": 420
   },
   {
@@ -138,9 +270,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:arctic_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:rainbow_composite_armor",
     "friction": 0.2,
     "mass": 2744.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:rainbow_composite_armor_slab",
+    "friction": 0.2,
+    "mass": 1372.0,
     "priority": 420
   },
   {
@@ -150,9 +294,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:desert_reinforced_armor",
     "friction": 0.2,
     "mass": 4312.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:desert_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
     "priority": 420
   },
   {
@@ -162,9 +318,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:forest_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:woodland_polygon_reinforced_armor",
     "friction": 0.2,
     "mass": 4312.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:woodland_polygon_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
     "priority": 420
   },
   {
@@ -174,9 +342,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:gray_polygon_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:bush_reinforced_armor",
     "friction": 0.2,
     "mass": 4312.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:bush_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
     "priority": 420
   },
   {
@@ -186,9 +366,21 @@
     "priority": 420
   },
   {
+    "block": "vscarmor:arctic_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
+    "priority": 420
+  },
+  {
     "block": "vscarmor:rainbow_reinforced_armor",
     "friction": 0.2,
     "mass": 4312.0,
+    "priority": 420
+  },
+  {
+    "block": "vscarmor:rainbow_reinforced_armor_slab",
+    "friction": 0.2,
+    "mass": 2156.0,
     "priority": 420
   }
 ]

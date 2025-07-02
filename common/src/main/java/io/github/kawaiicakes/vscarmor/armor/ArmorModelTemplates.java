@@ -37,6 +37,11 @@ public class ArmorModelTemplates {
 
     public static final ModelTemplate UNIVERSAL_SLAB = block(
             "universal_slab",
+            TextureSlot.ALL
+    );
+
+    public static final ModelTemplate UNIVERSAL_SLAB_WL = block(
+            "universal_slab_waterline",
             TextureSlot.ALL,
             ArmorTextureSlots.WATERLINE
     );

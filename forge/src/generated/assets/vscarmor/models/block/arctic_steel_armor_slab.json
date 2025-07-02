@@ -1,0 +1,6 @@
+{
+  "parent": "vscarmor:block/universal_slab",
+  "textures": {
+    "all": "vscarmor:block/arctic_steel_armor"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "vscarmor:block/universal_slab_waterline",
+  "textures": {
+    "all": "vscarmor:block/desert_light_armor",
+    "waterline": "vscarmor:block/light_armor"
+  }
+}

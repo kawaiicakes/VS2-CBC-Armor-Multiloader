@@ -6,6 +6,7 @@ import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -48,13 +49,22 @@ public class ArmorBlock extends Block implements ColorableBlock {
     public void generateModelForType(BlockModelGenerators generator) {
         TextureMapping mapping = this.grade.getTextureMapping(this);
 
-        // TODO - Use FULL_BLOCK for those with 0 layers, match template with corresponding layer count, also WL
-        ResourceLocation baseModel = ArmorModelTemplates.FULL_BLOCK.create(
+        final ModelTemplate[] templates = {
+                ArmorModelTemplates.FULL_BLOCK
+        };
+        final ModelTemplate[] wlTemplates = {
+                ArmorModelTemplates.FULL_BLOCK_WL
+        };
+
+        ModelTemplate baseModelTemplate = templates[this.pattern.getLayers()];
+        ModelTemplate baseModelWlTemplate = wlTemplates[this.pattern.getLayers()];
+
+        ResourceLocation baseModel = baseModelTemplate.create(
                 this,
                 mapping,
                 generator.modelOutput
         );
-        ResourceLocation baseModelWl = ArmorModelTemplates.FULL_BLOCK_WL.createWithSuffix(
+        ResourceLocation baseModelWl = baseModelWlTemplate.createWithSuffix(
                 this,
                 "_waterline",
                 mapping,

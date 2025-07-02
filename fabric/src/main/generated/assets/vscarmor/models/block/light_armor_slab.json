@@ -1,0 +1,6 @@
+{
+  "parent": "vscarmor:block/universal_slab",
+  "textures": {
+    "all": "vscarmor:block/light_armor"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "vscarmor:block/universal_slab_waterline",
+  "textures": {
+    "all": "vscarmor:block/arctic_steel_armor",
+    "waterline": "vscarmor:block/steel_armor"
+  }
+}

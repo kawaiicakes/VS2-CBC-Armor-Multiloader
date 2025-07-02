@@ -1,10 +1,12 @@
 package io.github.kawaiicakes.vscarmor;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import io.github.kawaiicakes.vscarmor.armor.Type;
 import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
 import io.github.kawaiicakes.vscarmor.armor.Grade;
 import io.github.kawaiicakes.vscarmor.armor.Pattern;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
+import io.github.kawaiicakes.vscarmor.block.UniversalSlabBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -49,6 +51,16 @@ public class VSCArmorRegistry {
     ) {
         ORDERED_BLOCK_NAMES.add(seriesName);
         blockConsumer.accept(seriesName, () -> new ArmorBlock(grade.properties(), grade, pattern));
+
+        ORDERED_BLOCK_NAMES.add(seriesName + "_slab");
+        blockConsumer.accept(
+                seriesName + "_slab",
+                () -> new UniversalSlabBlock(
+                        grade.properties(Type.SLAB.getPropertyMultiplier()),
+                        grade,
+                        pattern
+                )
+        );
     }
 
     @ExpectPlatform

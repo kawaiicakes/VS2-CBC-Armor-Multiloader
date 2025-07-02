@@ -1,7 +1,14 @@
 package io.github.kawaiicakes.vscarmor.block;
 
+import io.github.kawaiicakes.vscarmor.armor.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.blockstates.*;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -24,8 +31,9 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
+// TODO - tweak and complete behaviour
 @SuppressWarnings("deprecation")
-public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterloggedBlock, ColorableBlock {
     public static final BooleanProperty DOUBLET = BooleanProperty.create("doublet");
     public static final VoxelShape NORTH = Block.box(
             0.0, 0.0, 0.0,
@@ -46,14 +54,20 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
     public static final VoxelShape UP = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     public static final VoxelShape DOWN = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
-    public UniversalSlabBlock(Properties settings) {
+    protected final Grade grade;
+    protected final Pattern pattern;
+
+    public UniversalSlabBlock(Properties settings, Grade grade, Pattern pattern) {
         super(settings);
         this.registerDefaultState(
                 this.defaultBlockState()
                         .setValue(FACING, Direction.DOWN)
                         .setValue(DOUBLET, Boolean.FALSE)
                         .setValue(WATERLOGGED, Boolean.FALSE)
+                        .setValue(WATERLINE, Boolean.FALSE)
         );
+        this.grade = grade;
+        this.pattern = pattern;
     }
 
     @Override
@@ -63,7 +77,7 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, DOUBLET, WATERLOGGED);
+        pBuilder.add(FACING, DOUBLET, WATERLOGGED, WATERLINE);
     }
 
     @Override
@@ -94,7 +108,6 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
                     .setValue(DOUBLET, Boolean.FALSE)
                     .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 
-            // TODO - tweak and complete this behaviour
             boolean isUp = (ctx.getClickLocation().y - ctx.getClickedPos().getY()) > 0.5;
             double horizontalCoordOnBlock;
             final double oneThird = (double) 1 / 3;
@@ -174,5 +187,204 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
             case LAND, AIR -> false;
             case WATER -> pLevel.getFluidState(pPos).is(FluidTags.WATER);
         };
+    }
+
+    @Override
+    public Grade getGrade() {
+        return this.grade;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.SLAB;
+    }
+
+    @Override
+    public Pattern getPattern() {
+        return this.pattern;
+    }
+
+    // FIXME - Redo in consideration for horizontal v. vertical blockstates is necessary.
+    @Override
+    public void generateModelForType(BlockModelGenerators generator) {
+        TextureMapping map = this.getGrade().getTextureMapping(this);
+
+        ModelTemplate[] modelTemplates = {
+            ArmorModelTemplates.UNIVERSAL_SLAB
+        };
+        ModelTemplate[] modelWlTemplates = {
+            ArmorModelTemplates.UNIVERSAL_SLAB_WL
+        };
+
+        ModelTemplate template = modelTemplates[this.pattern.getLayers()];
+        ModelTemplate wlTemplate = modelWlTemplates[this.pattern.getLayers()];
+        
+        ResourceLocation slabModelId = template.create(this, map, generator.modelOutput);
+        ResourceLocation wlSlabModelId = wlTemplate.create(
+                ModelLocationUtils.getModelLocation(this, "_waterline"),
+                map,
+                generator.modelOutput
+        );
+
+        generator.blockStateOutput.accept(
+                createUniversalSlabBlockstate(this, slabModelId, wlSlabModelId, this.grade, this)
+        );
+
+        generator.delegateItemModel(this, slabModelId);
+    }
+
+    public static BlockStateGenerator createUniversalSlabBlockstate(
+            Block slab, 
+            ResourceLocation slabBlockModelId, ResourceLocation wlSlabModelId, 
+            Grade grade, ColorableBlock colorable
+    ) {
+        ResourceLocation baseModelId = grade.getGradeBaseModelId(colorable);
+        ResourceLocation wlBaseModelId = grade.getGradeWlBaseModelId(colorable);
+        
+        return MultiVariantGenerator.multiVariant(slab)
+                .with(
+                        PropertyDispatch
+                                .properties(
+                                        FACING,
+                                        UniversalSlabBlock.DOUBLET,
+                                        WATERLINE
+                                )
+                                .select(
+                                        Direction.UP, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.EAST, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                )
+                                .select(
+                                        Direction.SOUTH, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.WEST, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.NORTH, Boolean.FALSE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, slabBlockModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.UP, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(
+                                        Direction.EAST, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(
+                                        Direction.SOUTH, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(Direction.WEST, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(Direction.NORTH, Boolean.TRUE, Boolean.FALSE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, baseModelId)
+                                )
+                                .select(
+                                        Direction.UP, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.EAST, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                )
+                                .select(
+                                        Direction.SOUTH, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.WEST, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.NORTH, Boolean.FALSE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlSlabModelId)
+                                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                )
+                                .select(
+                                        Direction.UP, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                                .select(
+                                        Direction.DOWN, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                                .select(
+                                        Direction.EAST, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                                .select(
+                                        Direction.SOUTH, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                                .select(Direction.WEST, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                                .select(Direction.NORTH, Boolean.TRUE, Boolean.TRUE,
+                                        Variant.variant()
+                                                .with(VariantProperties.MODEL, wlBaseModelId)
+                                )
+                );
     }
 }

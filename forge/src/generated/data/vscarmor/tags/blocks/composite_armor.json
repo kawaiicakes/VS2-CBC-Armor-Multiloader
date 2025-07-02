@@ -1,12 +1,20 @@
 {
   "values": [
     "vscarmor:composite_armor",
+    "vscarmor:composite_armor_slab",
     "vscarmor:desert_composite_armor",
+    "vscarmor:desert_composite_armor_slab",
     "vscarmor:forest_composite_armor",
+    "vscarmor:forest_composite_armor_slab",
     "vscarmor:woodland_polygon_composite_armor",
+    "vscarmor:woodland_polygon_composite_armor_slab",
     "vscarmor:gray_polygon_composite_armor",
+    "vscarmor:gray_polygon_composite_armor_slab",
     "vscarmor:bush_composite_armor",
+    "vscarmor:bush_composite_armor_slab",
     "vscarmor:arctic_composite_armor",
-    "vscarmor:rainbow_composite_armor"
+    "vscarmor:arctic_composite_armor_slab",
+    "vscarmor:rainbow_composite_armor",
+    "vscarmor:rainbow_composite_armor_slab"
   ]
 }

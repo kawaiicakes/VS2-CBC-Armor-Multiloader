@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 // TODO - Life preservers
 // TODO - Tooltip includes armour stats
 // TODO - item display names should dynamically account for colours to make searching easier
+// TODO - Fix MapColors
 
 // TODO (2.1) - Eighths
 // TODO (2.1) - Reactive armour

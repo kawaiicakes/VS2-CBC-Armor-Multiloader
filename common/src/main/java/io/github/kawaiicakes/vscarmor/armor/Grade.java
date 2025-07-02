@@ -120,8 +120,17 @@ public enum Grade implements StringRepresentable {
 	}
 
 	public TextureMapping getTextureMapping(ColorableBlock colorableBlock) {
-		return this.mapping.apply(VSCArmorModelProvider.withPrefixedPath(
-				colorableBlock.getPatternBaseTexture(), "block/")
+		return this.mapping.apply(getGradeBaseModelId(colorableBlock));
+	}
+
+	public ResourceLocation getGradeBaseModelId(ColorableBlock colorableBlock) {
+		return VSCArmorModelProvider.withPrefixedPath(colorableBlock.getPatternBaseTexture(), "block/");
+	}
+
+	public ResourceLocation getGradeWlBaseModelId(ColorableBlock colorableBlock) {
+		return VSCArmorModelProvider.withSuffixedPath(
+				VSCArmorModelProvider.withPrefixedPath(colorableBlock.getPatternBaseTexture(), "block/"),
+				"_waterline"
 		);
 	}
 

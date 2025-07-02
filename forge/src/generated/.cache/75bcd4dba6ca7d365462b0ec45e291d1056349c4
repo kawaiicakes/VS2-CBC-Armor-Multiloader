@@ -1,11 +1,11 @@
-// 1.19.2	2025-06-26T17:44:07.9741156	Tags for minecraft:block
+// 1.19.2	2025-07-01T23:47:05.7527171	Tags for minecraft:block
 0304d92ba0f95aa11e98e02d0242b70cf970bc26 data/minecraft/tags/blocks/beacon_base_blocks.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/fences.json
-0304d92ba0f95aa11e98e02d0242b70cf970bc26 data/minecraft/tags/blocks/mineable/pickaxe.json
-0304d92ba0f95aa11e98e02d0242b70cf970bc26 data/minecraft/tags/blocks/needs_diamond_tool.json
+d94dad3c551cc8fbd9c6f2db091fec74405afe28 data/minecraft/tags/blocks/mineable/pickaxe.json
+d94dad3c551cc8fbd9c6f2db091fec74405afe28 data/minecraft/tags/blocks/needs_diamond_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/walls.json
-0304d92ba0f95aa11e98e02d0242b70cf970bc26 data/minecraft/tags/blocks/wither_immune.json
-362bb164831c16279e886b60f99a47e904c340af data/vscarmor/tags/blocks/composite_armor.json
-08fbff3bf556e5a694f07655b6093509a95412fa data/vscarmor/tags/blocks/light_armor.json
-cdf1cf96bb0f2323918ec0f269dc67f86e7f796e data/vscarmor/tags/blocks/reinforced_armor.json
-49d4cbdf153c93d1da30dc6c4fb81d7cc5982bd5 data/vscarmor/tags/blocks/steel_armor.json
+d94dad3c551cc8fbd9c6f2db091fec74405afe28 data/minecraft/tags/blocks/wither_immune.json
+d309f65a82ccddd43c56228271e637c0698c84fc data/vscarmor/tags/blocks/composite_armor.json
+4673ce20cbbec62cf953536ed335fd0a16c8f98b data/vscarmor/tags/blocks/light_armor.json
+7d209424c51fea17eaf646566fa8a0aa336e7c96 data/vscarmor/tags/blocks/reinforced_armor.json
+dbf60063110510ef2d642b1e99bf4ac7617f454a data/vscarmor/tags/blocks/steel_armor.json

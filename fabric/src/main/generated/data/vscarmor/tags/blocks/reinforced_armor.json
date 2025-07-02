@@ -1,13 +1,21 @@
 {
   "replace": false,
   "values": [
-    "vscarmor:rainbow_reinforced_armor",
     "vscarmor:woodland_polygon_reinforced_armor",
-    "vscarmor:desert_reinforced_armor",
-    "vscarmor:bush_reinforced_armor",
+    "vscarmor:gray_polygon_reinforced_armor_slab",
+    "vscarmor:woodland_polygon_reinforced_armor_slab",
+    "vscarmor:reinforced_armor_slab",
     "vscarmor:reinforced_armor",
-    "vscarmor:forest_reinforced_armor",
     "vscarmor:arctic_reinforced_armor",
-    "vscarmor:gray_polygon_reinforced_armor"
+    "vscarmor:bush_reinforced_armor_slab",
+    "vscarmor:gray_polygon_reinforced_armor",
+    "vscarmor:arctic_reinforced_armor_slab",
+    "vscarmor:rainbow_reinforced_armor",
+    "vscarmor:desert_reinforced_armor",
+    "vscarmor:forest_reinforced_armor_slab",
+    "vscarmor:bush_reinforced_armor",
+    "vscarmor:rainbow_reinforced_armor_slab",
+    "vscarmor:desert_reinforced_armor_slab",
+    "vscarmor:forest_reinforced_armor"
   ]
 }
