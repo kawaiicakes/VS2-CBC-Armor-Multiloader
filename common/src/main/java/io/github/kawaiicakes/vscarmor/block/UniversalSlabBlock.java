@@ -8,6 +8,7 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
@@ -53,6 +54,25 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
     );
     public static final VoxelShape UP = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     public static final VoxelShape DOWN = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+
+    public static final ModelTemplate UNIVERSAL_SLAB = ColorableBlock.block(
+            "universal_slab",
+            TextureSlot.ALL
+    );
+    public static final ModelTemplate UNIVERSAL_SLAB_WL = ColorableBlock.block(
+            "universal_slab_waterline",
+            TextureSlot.ALL,
+            ArmorTextureSlots.WATERLINE
+    );
+    public static final ModelTemplate UNIVERSAL_SLAB_HORIZONTAL = ColorableBlock.block(
+            "universal_slab_horizontal",
+            TextureSlot.ALL
+    );
+    public static final ModelTemplate UNIVERSAL_SLAB_HORIZONTAL_WL = ColorableBlock.block(
+            "universal_slab_horizontal_waterline",
+            TextureSlot.ALL,
+            ArmorTextureSlots.WATERLINE
+    );
 
     protected final Grade grade;
     protected final Pattern pattern;
@@ -204,20 +224,27 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
         return this.pattern;
     }
 
-    // FIXME - Redo in consideration for horizontal v. vertical blockstates is necessary.
     @Override
     public void generateModelForType(BlockModelGenerators generator) {
         TextureMapping map = this.getGrade().getTextureMapping(this);
 
         ModelTemplate[] modelTemplates = {
-            ArmorModelTemplates.UNIVERSAL_SLAB
+            UNIVERSAL_SLAB
         };
         ModelTemplate[] modelWlTemplates = {
-            ArmorModelTemplates.UNIVERSAL_SLAB_WL
+            UNIVERSAL_SLAB_WL
+        };
+        ModelTemplate[] hModelTemplates = {
+                UNIVERSAL_SLAB_HORIZONTAL
+        };
+        ModelTemplate[] hModelWlTemplates = {
+                UNIVERSAL_SLAB_HORIZONTAL_WL
         };
 
         ModelTemplate template = modelTemplates[this.pattern.getLayers()];
         ModelTemplate wlTemplate = modelWlTemplates[this.pattern.getLayers()];
+        ModelTemplate hTemplate = hModelTemplates[this.pattern.getLayers()];
+        ModelTemplate wlHTemplate = hModelWlTemplates[this.pattern.getLayers()];
         
         ResourceLocation slabModelId = template.create(this, map, generator.modelOutput);
         ResourceLocation wlSlabModelId = wlTemplate.create(
@@ -225,9 +252,24 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
                 map,
                 generator.modelOutput
         );
+        ResourceLocation hSlabModelId = hTemplate.create(
+                ModelLocationUtils.getModelLocation(this, "_horizontal"),
+                map,
+                generator.modelOutput
+        );
+        ResourceLocation wlHSlabModelId = wlHTemplate.create(
+                ModelLocationUtils.getModelLocation(this, "_horizontal_waterline"),
+                map,
+                generator.modelOutput
+        );
 
         generator.blockStateOutput.accept(
-                createUniversalSlabBlockstate(this, slabModelId, wlSlabModelId, this.grade, this)
+                createUniversalSlabBlockstate(
+                        this,
+                        slabModelId, wlSlabModelId,
+                        hSlabModelId, wlHSlabModelId,
+                        this.grade, this
+                )
         );
 
         generator.delegateItemModel(this, slabModelId);
@@ -235,7 +277,8 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
 
     public static BlockStateGenerator createUniversalSlabBlockstate(
             Block slab, 
-            ResourceLocation slabBlockModelId, ResourceLocation wlSlabModelId, 
+            ResourceLocation slabBlockModelId, ResourceLocation wlSlabModelId,
+            ResourceLocation hSlabBlockModelId, ResourceLocation wlHSlabModelId,
             Grade grade, ColorableBlock colorable
     ) {
         ResourceLocation baseModelId = grade.getGradeBaseModelId(colorable);
@@ -252,16 +295,14 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
                                 .select(
                                         Direction.UP, Boolean.FALSE, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, slabBlockModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.MODEL, hSlabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
                                 )
                                 .select(
                                         Direction.DOWN, Boolean.FALSE, Boolean.FALSE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, slabBlockModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                                .with(VariantProperties.MODEL, hSlabBlockModelId)
                                 )
                                 .select(
                                         Direction.EAST, Boolean.FALSE, Boolean.FALSE,
@@ -320,16 +361,14 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
                                 .select(
                                         Direction.UP, Boolean.FALSE, Boolean.TRUE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, wlSlabModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                                .with(VariantProperties.MODEL, hSlabBlockModelId)
+                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180)
                                                 .with(VariantProperties.UV_LOCK, Boolean.TRUE)
                                 )
                                 .select(
                                         Direction.DOWN, Boolean.FALSE, Boolean.TRUE,
                                         Variant.variant()
-                                                .with(VariantProperties.MODEL, wlSlabModelId)
-                                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270)
-                                                .with(VariantProperties.UV_LOCK, Boolean.TRUE)
+                                                .with(VariantProperties.MODEL, wlHSlabModelId)
                                 )
                                 .select(
                                         Direction.EAST, Boolean.FALSE, Boolean.TRUE,

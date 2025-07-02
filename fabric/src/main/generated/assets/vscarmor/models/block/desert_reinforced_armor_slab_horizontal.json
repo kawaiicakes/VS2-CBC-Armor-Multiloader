@@ -1,0 +1,6 @@
+{
+  "parent": "vscarmor:block/universal_slab_horizontal",
+  "textures": {
+    "all": "vscarmor:block/desert_reinforced_armor"
+  }
+}

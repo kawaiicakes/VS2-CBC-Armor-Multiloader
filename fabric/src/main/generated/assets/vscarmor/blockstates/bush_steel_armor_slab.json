@@ -1,14 +1,10 @@
 {
   "variants": {
     "doublet=false,facing=down,waterline=false": {
-      "model": "vscarmor:block/bush_steel_armor_slab",
-      "uvlock": true,
-      "x": 270
+      "model": "vscarmor:block/bush_steel_armor_slab_horizontal"
     },
     "doublet=false,facing=down,waterline=true": {
-      "model": "vscarmor:block/bush_steel_armor_slab_waterline",
-      "uvlock": true,
-      "x": 270
+      "model": "vscarmor:block/bush_steel_armor_slab_horizontal_waterline"
     },
     "doublet=false,facing=east,waterline=false": {
       "model": "vscarmor:block/bush_steel_armor_slab"
@@ -37,14 +33,14 @@
       "y": 90
     },
     "doublet=false,facing=up,waterline=false": {
-      "model": "vscarmor:block/bush_steel_armor_slab",
+      "model": "vscarmor:block/bush_steel_armor_slab_horizontal",
       "uvlock": true,
-      "x": 90
+      "x": 180
     },
     "doublet=false,facing=up,waterline=true": {
-      "model": "vscarmor:block/bush_steel_armor_slab_waterline",
+      "model": "vscarmor:block/bush_steel_armor_slab_horizontal",
       "uvlock": true,
-      "x": 90
+      "x": 180
     },
     "doublet=false,facing=west,waterline=false": {
       "model": "vscarmor:block/bush_steel_armor_slab",
