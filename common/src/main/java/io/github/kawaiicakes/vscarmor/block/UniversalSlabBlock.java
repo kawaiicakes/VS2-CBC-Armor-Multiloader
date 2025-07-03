@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-// TODO - tweak and complete behaviour
 @SuppressWarnings("deprecation")
 public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterloggedBlock, ColorableBlock {
     public static final BooleanProperty DOUBLET = BooleanProperty.create("doublet");
@@ -119,42 +118,72 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockPos blockPos = ctx.getClickedPos();
         BlockState blockAtPos = ctx.getLevel().getBlockState(blockPos);
+        Direction directionOfClickedFace = ctx.getClickedFace();
+        Direction.Axis axisOfClickedFace = directionOfClickedFace.getAxis();
 
         if (blockAtPos.is(this)) {
+            // FIXME - what happens when mismatched data is placed from hand?
             return blockAtPos.setValue(DOUBLET, Boolean.TRUE).setValue(WATERLOGGED, Boolean.FALSE);
-        } else {
-            FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
-            BlockState blockState2 = this.defaultBlockState()
-                    .setValue(DOUBLET, Boolean.FALSE)
-                    .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        }
 
-            boolean isUp = (ctx.getClickLocation().y - ctx.getClickedPos().getY()) > 0.5;
-            double horizontalCoordOnBlock;
-            final double oneThird = (double) 1 / 3;
-            final double twoThirds = (double) 2 / 3;
+        Direction horizontalFacingDirection = ctx.getHorizontalDirection();
 
-            if (ctx.getHorizontalDirection().getAxis() == Direction.Axis.X) {
-                horizontalCoordOnBlock = ctx.getClickLocation().x - (double) ctx.getClickedPos().getX();
+        FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
+        BlockState stateForPlacement = this.defaultBlockState()
+                .setValue(DOUBLET, Boolean.FALSE)
+                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 
-                if (horizontalCoordOnBlock < oneThird) {
-                    return blockState2.setValue(FACING, Direction.WEST);
-                } else if (horizontalCoordOnBlock >= oneThird && horizontalCoordOnBlock < twoThirds) {
-                    return blockState2.setValue(FACING, isUp ? Direction.UP : Direction.DOWN);
-                } else {
-                    return blockState2.setValue(FACING, Direction.EAST);
-                }
-            } else {
-                horizontalCoordOnBlock = ctx.getClickLocation().z - (double) ctx.getClickedPos().getZ();
+        Direction.Axis horizontalAxisOfPlacement = horizontalFacingDirection.getAxis();
 
-                if (horizontalCoordOnBlock < oneThird) {
-                    return blockState2.setValue(FACING, Direction.NORTH);
-                } else if (horizontalCoordOnBlock >= oneThird && horizontalCoordOnBlock < twoThirds) {
-                    return blockState2.setValue(FACING, isUp ? Direction.UP : Direction.DOWN);
-                } else {
-                    return blockState2.setValue(FACING, Direction.SOUTH);
-                }
+        double globalClickPosOnHorizontalAxisOfPlacement = 0;
+        double globalBlockPosOfClickedBlock = 0;
+
+        switch (horizontalAxisOfPlacement) {
+            case X -> {
+                globalBlockPosOfClickedBlock = blockPos.getX();
+                globalClickPosOnHorizontalAxisOfPlacement = ctx.getClickLocation().x;
+            }
+            case Y -> throw new IllegalStateException();
+            case Z -> {
+                globalBlockPosOfClickedBlock = blockPos.getZ();
+                globalClickPosOnHorizontalAxisOfPlacement = ctx.getClickLocation().z;
             }
         }
+
+        double coordinateOnAxisOfPlacement = globalClickPosOnHorizontalAxisOfPlacement - globalBlockPosOfClickedBlock;
+
+        Direction directionOfLowerThirdPlacement = null;
+        Direction directionOfMiddleThirdPlacement = null;
+
+        switch (axisOfClickedFace) {
+            case X -> {
+                directionOfLowerThirdPlacement = Direction.DOWN;
+                directionOfMiddleThirdPlacement = Direction.EAST;
+            }
+            case Y -> {
+                directionOfLowerThirdPlacement = horizontalAxisOfPlacement.equals(Direction.Axis.X)
+                        ? Direction.WEST
+                        : Direction.NORTH;
+                directionOfMiddleThirdPlacement = Direction.EAST;
+            }
+            case Z -> {
+                directionOfLowerThirdPlacement = Direction.DOWN;
+                directionOfMiddleThirdPlacement = Direction.SOUTH;
+            }
+        }
+
+        // TODO - Use rotation on different axes to determine direction of placement instead.
+        Direction directionOfPlacement;
+
+        if (coordinateOnAxisOfPlacement < ((double) 1 / 3)) {
+            directionOfPlacement = directionOfLowerThirdPlacement;
+        } else if (coordinateOnAxisOfPlacement < ((double) 2 / 3)) {
+            directionOfPlacement = directionOfMiddleThirdPlacement;
+        } else {
+            directionOfPlacement = directionOfLowerThirdPlacement.getOpposite();
+        }
+
+        return stateForPlacement.setValue(FACING, directionOfPlacement);
     }
 
     @Override
