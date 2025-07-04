@@ -4,7 +4,7 @@
       "model": "vscarmor:block/woodland_polygon_light_armor_slab_horizontal"
     },
     "doublet=false,facing=down,waterline=true": {
-      "model": "vscarmor:block/woodland_polygon_light_armor_slab_horizontal_waterline"
+      "model": "vscarmor:block/woodland_polygon_light_armor_slab_waterline_horizontal"
     },
     "doublet=false,facing=east,waterline=false": {
       "model": "vscarmor:block/woodland_polygon_light_armor_slab"

@@ -1,5 +1,5 @@
 {
-  "parent": "vscarmor:block/basic_colorable",
+  "parent": "vscarmor:block/full/basic_colorable",
   "textures": {
     "all": "vscarmor:block/desert_steel_armor"
   }

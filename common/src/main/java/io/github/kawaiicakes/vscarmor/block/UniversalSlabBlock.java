@@ -56,20 +56,20 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
     public static final VoxelShape DOWN = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
     public static final ModelTemplate UNIVERSAL_SLAB = ColorableBlock.block(
-            "universal_slab",
+            "universal_slab/basic_colorable",
             TextureSlot.ALL
     );
     public static final ModelTemplate UNIVERSAL_SLAB_WL = ColorableBlock.block(
-            "universal_slab_waterline",
+            "universal_slab/basic_colorable_waterline",
             TextureSlot.ALL,
             ArmorTextureSlots.WATERLINE
     );
     public static final ModelTemplate UNIVERSAL_SLAB_HORIZONTAL = ColorableBlock.block(
-            "universal_slab_horizontal",
+            "universal_slab/basic_colorable_horizontal",
             TextureSlot.ALL
     );
     public static final ModelTemplate UNIVERSAL_SLAB_HORIZONTAL_WL = ColorableBlock.block(
-            "universal_slab_horizontal_waterline",
+            "universal_slab/basic_colorable_waterline_horizontal",
             TextureSlot.ALL,
             ArmorTextureSlots.WATERLINE
     );
@@ -269,7 +269,7 @@ public class UniversalSlabBlock extends DirectionalBlock implements SimpleWaterl
                 generator.modelOutput
         );
         ResourceLocation wlHSlabModelId = wlHTemplate.create(
-                ModelLocationUtils.getModelLocation(this, "_horizontal_waterline"),
+                ModelLocationUtils.getModelLocation(this, "_waterline_horizontal"),
                 map,
                 generator.modelOutput
         );

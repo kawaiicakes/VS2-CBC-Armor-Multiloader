@@ -1,5 +1,5 @@
 {
-  "parent": "vscarmor:block/universal_slab",
+  "parent": "vscarmor:block/universal_slab/basic_colorable",
   "textures": {
     "all": "vscarmor:block/woodland_polygon_composite_armor"
   }

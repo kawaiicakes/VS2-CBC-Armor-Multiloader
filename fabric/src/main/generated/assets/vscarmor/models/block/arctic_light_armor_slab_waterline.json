@@ -1,5 +1,5 @@
 {
-  "parent": "vscarmor:block/universal_slab_waterline",
+  "parent": "vscarmor:block/universal_slab/basic_colorable_waterline",
   "textures": {
     "all": "vscarmor:block/arctic_light_armor",
     "waterline": "vscarmor:block/light_armor"

@@ -31,11 +31,11 @@ public class ArmorBlock extends Block implements ColorableBlock {
                 the models are assigned.
      */
     public static final ModelTemplate FULL_BLOCK = ColorableBlock.block(
-            "basic_colorable",
+            "full/basic_colorable",
             TextureSlot.ALL
     );
     public static final ModelTemplate FULL_BLOCK_WL = ColorableBlock.block(
-            "basic_colorable_waterline",
+            "full/basic_colorable_waterline",
             TextureSlot.ALL,
             ArmorTextureSlots.WATERLINE
     );

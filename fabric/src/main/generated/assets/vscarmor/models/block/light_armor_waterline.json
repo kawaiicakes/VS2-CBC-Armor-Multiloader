@@ -1,5 +1,5 @@
 {
-  "parent": "vscarmor:block/basic_colorable_waterline",
+  "parent": "vscarmor:block/full/basic_colorable_waterline",
   "textures": {
     "all": "vscarmor:block/light_armor",
     "waterline": "vscarmor:block/light_armor"

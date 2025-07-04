@@ -1,7 +1,0 @@
-{
-  "parent": "vscarmor:block/universal_slab_horizontal_waterline",
-  "textures": {
-    "all": "vscarmor:block/rainbow_composite_armor",
-    "waterline": "vscarmor:block/composite_armor"
-  }
-}

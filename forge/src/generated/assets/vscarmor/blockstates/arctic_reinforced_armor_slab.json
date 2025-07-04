@@ -4,7 +4,7 @@
       "model": "vscarmor:block/arctic_reinforced_armor_slab_horizontal"
     },
     "doublet=false,facing=down,waterline=true": {
-      "model": "vscarmor:block/arctic_reinforced_armor_slab_horizontal_waterline"
+      "model": "vscarmor:block/arctic_reinforced_armor_slab_waterline_horizontal"
     },
     "doublet=false,facing=east,waterline=false": {
       "model": "vscarmor:block/arctic_reinforced_armor_slab"
