@@ -1,7 +1,12 @@
 package io.github.kawaiicakes.vscarmor.block;
 
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlock;
+import io.github.kawaiicakes.vscarmor.armor.Grade;
+import io.github.kawaiicakes.vscarmor.armor.Pattern;
+import io.github.kawaiicakes.vscarmor.armor.Type;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -34,7 +39,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 @SuppressWarnings("deprecation")
-public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock {
+public class VerticalArmorStairs extends Block implements SimpleWaterloggedBlock, ColorableBlock {
     public static final EnumProperty<BlockHalf> HALF = EnumProperty.create("half", BlockHalf.class);
     public static final EnumProperty<VerticalStairShape> V_SHAPE
             = EnumProperty.create("shape", VerticalStairShape.class);
@@ -69,8 +74,13 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
 
     private final Block baseBlock;
     private final BlockState baseBlockState;
+    private final Grade grade;
+    private final Pattern pattern;
 
-    public VerticalStairsBlock(Supplier<BlockState> baseBlockState, Properties settings) {
+    public VerticalArmorStairs(
+            Supplier<BlockState> baseBlockState, Properties settings,
+            Grade grade, Pattern pattern
+    ) {
         super(settings);
         this.registerDefaultState(
                 this.defaultBlockState()
@@ -81,6 +91,8 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
         );
         this.baseBlock = baseBlockState.get().getBlock();
         this.baseBlockState = baseBlockState.get();
+        this.grade = grade;
+        this.pattern = pattern;
     }
 
     @Override
@@ -273,7 +285,7 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
     }
 
     public static boolean isVStairs(BlockState state) {
-        return state.getBlock() instanceof VerticalStairsBlock;
+        return state.getBlock() instanceof VerticalArmorStairs;
     }
 
     @Override
@@ -320,6 +332,26 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
     @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
+    }
+
+    @Override
+    public Grade getGrade() {
+        return this.grade;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.STAIRS;
+    }
+
+    @Override
+    public Pattern getPattern() {
+        return this.pattern;
+    }
+
+    @Override
+    public void generateModelForType(BlockModelGenerators generator) {
+
     }
 
     public enum BlockHalf implements StringRepresentable {

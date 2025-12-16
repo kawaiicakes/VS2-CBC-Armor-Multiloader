@@ -6,7 +6,10 @@ import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
 import io.github.kawaiicakes.vscarmor.armor.Grade;
 import io.github.kawaiicakes.vscarmor.armor.Pattern;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
+import io.github.kawaiicakes.vscarmor.block.ArmorStairs;
 import io.github.kawaiicakes.vscarmor.block.UniversalSlabBlock;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -56,6 +59,17 @@ public class VSCArmorRegistry {
         blockConsumer.accept(
                 seriesName + "_slab",
                 () -> new UniversalSlabBlock(
+                        grade.properties(Type.SLAB.getPropertyMultiplier()),
+                        grade,
+                        pattern
+                )
+        );
+
+        ORDERED_BLOCK_NAMES.add(seriesName + "_stairs");
+        blockConsumer.accept(
+                seriesName + "_stairs",
+                () -> new ArmorStairs(
+                        () -> Registry.BLOCK.get(new ResourceLocation(VSCArmor.MOD_ID, seriesName)),
                         grade.properties(Type.SLAB.getPropertyMultiplier()),
                         grade,
                         pattern
