@@ -3,7 +3,6 @@ package io.github.kawaiicakes.vscarmor.block;
 import io.github.kawaiicakes.vscarmor.armor.*;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
@@ -71,7 +70,7 @@ public class ArmorStairs extends StairBlock implements ColorableBlock {
 
         generator.blockStateOutput.accept(
                 BlockModelGenerators.createStairs(
-                        this, stairsModelId, wlStairsModelId, resourceLocation3
+                        this, stairsModelId, wlStairsModelId, stairsModelId
                 )
         );
 

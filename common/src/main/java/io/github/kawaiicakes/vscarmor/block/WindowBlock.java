@@ -8,6 +8,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+/**
+ * Intended to easily define window behaviour as well as how windows should behave when broken.
+ */
 @SuppressWarnings("unused")
 public interface WindowBlock {
     boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction);

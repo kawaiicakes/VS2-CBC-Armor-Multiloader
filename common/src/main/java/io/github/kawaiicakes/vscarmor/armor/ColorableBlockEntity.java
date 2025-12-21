@@ -16,6 +16,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * A {@link BlockEntity} representing a {@link ColorableBlock}. Contains the necessary logic for serialization and updating
+ * the properties & appearance of its block in the world.
+ */
 // TODO - Store waterline BlockState as a boolean to allow switching item model accordingly
 public class ColorableBlockEntity extends BlockEntity {
     protected int mainColor = 0xFFFFFF;

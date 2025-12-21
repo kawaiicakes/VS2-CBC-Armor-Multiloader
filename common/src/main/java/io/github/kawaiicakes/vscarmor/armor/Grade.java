@@ -14,6 +14,11 @@ import java.util.function.Function;
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
+// TODO (2.0) - make this an interface maybe? maybe even a concrete class that works with data-driven entries?
+
+/**
+ * Defines info relating to the strength and type of armour.
+ */
 public enum Grade implements StringRepresentable {
 	LIGHT(
 			"light_armor",

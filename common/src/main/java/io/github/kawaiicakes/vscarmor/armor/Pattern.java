@@ -4,6 +4,11 @@ import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
 
+// TODO (2.0) - make this an interface maybe? maybe even a concrete class that works with data-driven entries?
+
+/**
+ * Defines special patterns that blocks can be painted with.
+ */
 public enum Pattern implements StringRepresentable {
     NONE(false),
     DESERT(true),

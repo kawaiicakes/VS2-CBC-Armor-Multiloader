@@ -19,11 +19,21 @@ import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
 // FIXME: Colour only updates when an update is sent to client
 /**
- * Despite the name, this is implemented by any block from this mod that can take a pattern
+ * Implementing blocks take on properties and appearance based on their {@link Grade}, {@link Type}, and {@link Pattern}.
+ * They are also colourable with any arbitrary colour. Make sure to register instances of this to the loader's appropriate
+ * colour provider.
  */
 public interface ColorableBlock extends EntityBlock {
     BooleanProperty WATERLINE = BooleanProperty.create("waterline");
 
+    /**
+     *
+     * @param namespace
+     * @param parent
+     * @param variant
+     * @param requiredTextureSlots
+     * @return
+     */
     static ModelTemplate block(String namespace, String parent, String variant, TextureSlot... requiredTextureSlots) {
         return new ModelTemplate(
                 Optional.of(new ResourceLocation(namespace, "block/" + parent)),
@@ -69,7 +79,7 @@ public interface ColorableBlock extends EntityBlock {
 
     /**
      * Implementations must use the passed {@link BlockModelGenerators} to output a model, with its blockstate, generated
-     * based its {@link Grade}, {@link Pattern}, and {@link Type}. Remember to generate a waterline model for the blockstate, too.
+     * based on its {@link Grade}, {@link Pattern}, and {@link Type}. Remember to generate a waterline model for the blockstate, too.
      */
     void generateModelForType(BlockModelGenerators generator);
 }

@@ -4,6 +4,11 @@ import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
 
+// TODO (2.0) - make this an interface maybe? maybe even a concrete class that works with data-driven entries?
+
+/**
+ * Defines what kind of {@link net.minecraft.world.level.block.Block} subclass something is. Probably defunct post-COMPRESSING.
+ */
 public enum Type implements StringRepresentable {
     BLOCK(1),
     SLAB(0.5F),

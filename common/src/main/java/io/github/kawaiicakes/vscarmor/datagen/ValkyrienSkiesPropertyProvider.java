@@ -17,6 +17,9 @@ import java.util.List;
 
 import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
+/**
+ * Custom data provider for VS stuff. This might be defunct with future versions of VS
+ */
 public class ValkyrienSkiesPropertyProvider implements DataProvider {
     public final DataGenerator.PathProvider pathResolver;
 

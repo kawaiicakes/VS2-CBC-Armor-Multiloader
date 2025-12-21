@@ -14,6 +14,10 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+/**
+ * {@link BlockItem} representation of this mod's {@link ColorableBlock}s. Handles tooltip, item category sorting, and
+ * (expected to) handle dynamic item model rendering.
+ */
 public class ColorableBlockItem extends BlockItem {
     public ColorableBlockItem(Properties properties, Block block) {
         super(block, VSCArmorExpectPlatform.withTab(properties, ((ColorableBlock) block).getGrade()));
