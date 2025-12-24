@@ -60,7 +60,7 @@ public class ValkyrienSkiesPropertyProvider implements DataProvider {
 
     public static double getMass(Block block) {
         ColorableBlock colorableBlock = ((ColorableBlock) block);
-        return colorableBlock.getGrade().getMass() * colorableBlock.getType().getPropertyMultiplier();
+        return colorableBlock.getGrade().getMass();
     }
 
     @Override

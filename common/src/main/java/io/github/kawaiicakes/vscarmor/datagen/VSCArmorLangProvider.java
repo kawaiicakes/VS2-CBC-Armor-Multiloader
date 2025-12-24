@@ -34,7 +34,7 @@ public class VSCArmorLangProvider implements DataProvider {
             ColorableBlock asColorable = ((ColorableBlock) block);
             String pattern = asColorable.getPattern().asPrettyPrefix();
             String grade = asColorable.getGrade().getDisplayName();
-            String name = pattern + grade + asColorable.getType().asPrettySuffix();
+            String name = pattern + grade;
             translationBuilder.accept(block.getDescriptionId(), name);
         }
 

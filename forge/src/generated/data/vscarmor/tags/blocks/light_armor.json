@@ -1,20 +1,12 @@
 {
   "values": [
     "vscarmor:light_armor",
-    "vscarmor:light_armor_slab",
     "vscarmor:desert_light_armor",
-    "vscarmor:desert_light_armor_slab",
     "vscarmor:forest_light_armor",
-    "vscarmor:forest_light_armor_slab",
     "vscarmor:woodland_polygon_light_armor",
-    "vscarmor:woodland_polygon_light_armor_slab",
     "vscarmor:gray_polygon_light_armor",
-    "vscarmor:gray_polygon_light_armor_slab",
     "vscarmor:bush_light_armor",
-    "vscarmor:bush_light_armor_slab",
     "vscarmor:arctic_light_armor",
-    "vscarmor:arctic_light_armor_slab",
-    "vscarmor:rainbow_light_armor",
-    "vscarmor:rainbow_light_armor_slab"
+    "vscarmor:rainbow_light_armor"
   ]
 }

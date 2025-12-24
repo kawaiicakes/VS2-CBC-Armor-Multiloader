@@ -1,7 +1,0 @@
-{
-  "parent": "vscarmor:block/full/basic_colorable_waterline",
-  "textures": {
-    "all": "vscarmor:block/rainbow_reinforced_armor",
-    "waterline": "vscarmor:block/reinforced_armor"
-  }
-}

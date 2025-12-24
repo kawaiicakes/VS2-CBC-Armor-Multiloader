@@ -1,6 +1,5 @@
 package io.github.kawaiicakes.vscarmor.armor;
 
-import io.github.kawaiicakes.vscarmor.datagen.VSCArmorModelProvider;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 import static net.minecraft.world.level.block.Blocks.NETHERITE_BLOCK;
 
 // TODO (2.0) - make this an interface maybe? maybe even a concrete class that works with data-driven entries?
@@ -25,7 +23,6 @@ public enum Grade implements StringRepresentable {
 			3.0F, 5.0F, 392.0, 5, 1,
 			(patternBaseId) ->
 					TextureMapping.cube(patternBaseId)
-							.put(ArmorTextureSlots.WATERLINE, waterline("light_armor"))
 							.put(TextureSlot.SIDE, patternBaseId)
 							.put(TextureSlot.TOP, patternBaseId)
 							.put(TextureSlot.BOTTOM, patternBaseId)
@@ -38,7 +35,6 @@ public enum Grade implements StringRepresentable {
 			10.0F, 7.0F, 1176.0, 7, 1,
 			(patternBaseId) ->
 					TextureMapping.cube(patternBaseId)
-							.put(ArmorTextureSlots.WATERLINE, waterline("steel_armor"))
 							.put(TextureSlot.SIDE, patternBaseId)
 							.put(TextureSlot.TOP, patternBaseId)
 							.put(TextureSlot.BOTTOM, patternBaseId)
@@ -51,7 +47,6 @@ public enum Grade implements StringRepresentable {
 			28.0F, 8.0F, 2744.0, 8, 1,
 			(patternBaseId) ->
 					TextureMapping.cube(patternBaseId)
-							.put(ArmorTextureSlots.WATERLINE, waterline("composite_armor"))
 							.put(TextureSlot.SIDE, patternBaseId)
 							.put(TextureSlot.TOP, patternBaseId)
 							.put(TextureSlot.BOTTOM, patternBaseId)
@@ -64,7 +59,6 @@ public enum Grade implements StringRepresentable {
 			50.0F, 20.0F, 4312.0, 20, 1,
 			(patternBaseId) ->
 					TextureMapping.cube(patternBaseId)
-							.put(ArmorTextureSlots.WATERLINE, waterline("reinforced_armor"))
 							.put(TextureSlot.SIDE, patternBaseId)
 							.put(TextureSlot.TOP, patternBaseId)
 							.put(TextureSlot.BOTTOM, patternBaseId)
@@ -122,24 +116,5 @@ public enum Grade implements StringRepresentable {
 
 	public double getMass() {
 		return this.mass;
-	}
-
-	public TextureMapping getTextureMapping(ColorableBlock colorableBlock) {
-		return this.mapping.apply(getGradeBaseModelId(colorableBlock));
-	}
-
-	public ResourceLocation getGradeBaseModelId(ColorableBlock colorableBlock) {
-		return VSCArmorModelProvider.withPrefixedPath(colorableBlock.getPatternBaseTexture(), "block/");
-	}
-
-	public ResourceLocation getGradeWlBaseModelId(ColorableBlock colorableBlock) {
-		return VSCArmorModelProvider.withSuffixedPath(
-				VSCArmorModelProvider.withPrefixedPath(colorableBlock.getPatternBaseTexture(), "block/"),
-				"_waterline"
-		);
-	}
-
-	private static ResourceLocation waterline(String patternBase) {
-		return new ResourceLocation(MOD_ID, "block/" + patternBase);
 	}
 }

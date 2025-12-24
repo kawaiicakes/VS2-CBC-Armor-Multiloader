@@ -20,10 +20,8 @@ import java.util.List;
  * A {@link BlockEntity} representing a {@link ColorableBlock}. Contains the necessary logic for serialization and updating
  * the properties & appearance of its block in the world.
  */
-// TODO - Store waterline BlockState as a boolean to allow switching item model accordingly
 public class ColorableBlockEntity extends BlockEntity {
     protected int mainColor = 0xFFFFFF;
-    protected int waterlineColor = 0xFFFFFF;
     protected List<Integer> layers;
     protected ColorableBlock colorableBlock = null;
 
@@ -46,7 +44,6 @@ public class ColorableBlockEntity extends BlockEntity {
         super.saveAdditional(compoundTag);
         CompoundTag vscarmor = new CompoundTag();
         vscarmor.putInt("body", this.mainColor);
-        vscarmor.putInt("wl", this.waterlineColor);
         if (this.layers != null) {
             vscarmor.putIntArray("layers", this.layers);
         }
@@ -58,7 +55,6 @@ public class ColorableBlockEntity extends BlockEntity {
         super.load(compoundTag);
         CompoundTag vscarmor = compoundTag.getCompound("vscarmor");
         this.mainColor = vscarmor.getInt("body");
-        this.waterlineColor = vscarmor.getInt("wl");
 
         if (vscarmor.contains("layers", Tag.TAG_INT_ARRAY)) {
             int[] layersArray = vscarmor.getIntArray("layers");
@@ -76,7 +72,6 @@ public class ColorableBlockEntity extends BlockEntity {
 
         CompoundTag vscarmor = new CompoundTag();
         vscarmor.putInt("body", this.mainColor);
-        vscarmor.putInt("wl", this.waterlineColor);
 
         toReturn.put("vscarmor", vscarmor);
 
@@ -97,21 +92,13 @@ public class ColorableBlockEntity extends BlockEntity {
         );
     }
 
+    // TODO - only one get and set layer colour method. Main colour is layer 0
     public int getMainColor() {
         return this.mainColor;
     }
 
     public void setMainColor(int mainColor) {
         this.mainColor = mainColor;
-        this.setChanged();
-    }
-
-    public int getWaterlineColor() {
-        return this.waterlineColor;
-    }
-
-    public void setWaterlineColor(int waterlineColor) {
-        this.waterlineColor = waterlineColor;
         this.setChanged();
     }
 

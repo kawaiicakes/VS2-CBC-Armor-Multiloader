@@ -1,7 +1,0 @@
-{
-  "parent": "vscarmor:block/universal_slab/basic_colorable_waterline_horizontal",
-  "textures": {
-    "all": "vscarmor:block/gray_polygon_light_armor",
-    "waterline": "vscarmor:block/light_armor"
-  }
-}

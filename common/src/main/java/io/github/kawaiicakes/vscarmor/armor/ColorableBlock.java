@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,13 +18,11 @@ import static io.github.kawaiicakes.vscarmor.VSCArmor.MOD_ID;
 
 // FIXME: Colour only updates when an update is sent to client
 /**
- * Implementing blocks take on properties and appearance based on their {@link Grade}, {@link Type}, and {@link Pattern}.
+ * Implementing blocks take on properties and appearance based on their {@link Grade} and {@link Pattern}.
  * They are also colourable with any arbitrary colour. Make sure to register instances of this to the loader's appropriate
  * colour provider.
  */
 public interface ColorableBlock extends EntityBlock {
-    BooleanProperty WATERLINE = BooleanProperty.create("waterline");
-
     /**
      *
      * @param namespace
@@ -73,13 +70,11 @@ public interface ColorableBlock extends EntityBlock {
 
     Grade getGrade();
 
-    Type getType();
-
     Pattern getPattern();
 
     /**
      * Implementations must use the passed {@link BlockModelGenerators} to output a model, with its blockstate, generated
-     * based on its {@link Grade}, {@link Pattern}, and {@link Type}. Remember to generate a waterline model for the blockstate, too.
+     * based on its {@link Grade} and {@link Pattern}. Remember to generate a waterline model for the blockstate, too.
      */
     void generateModelForType(BlockModelGenerators generator);
 }

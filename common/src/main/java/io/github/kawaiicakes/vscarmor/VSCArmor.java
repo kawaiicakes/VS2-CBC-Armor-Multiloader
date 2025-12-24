@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 // TODO (2.0) - Fix MapColors
 // TODO (2.0) - the COMPRESSING (removal of as much registered stuff as possible; a single NBT-based block
 // TODO (2.0) - Copycat and Framed Block support for the COMPRESSING; maybe make an interface for this
-// TODO (2.0) - pending removal of waterline stuff for the COMPRESSING
 // TODO (2.0) - Alphabet shit.
 // TODO (2.0) - Hatches, bulkhead doors
 // TODO (2.0) - Teak

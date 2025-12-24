@@ -1,6 +1,0 @@
-{
-  "parent": "vscarmor:block/universal_slab/basic_colorable",
-  "textures": {
-    "all": "vscarmor:block/gray_polygon_steel_armor"
-  }
-}

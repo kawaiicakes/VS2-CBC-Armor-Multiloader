@@ -1,5 +1,5 @@
 {
-  "parent": "vscarmor:block/full/basic_colorable",
+  "parent": "vscarmor:block/basic_colorable",
   "textures": {
     "all": "vscarmor:block/woodland_polygon_light_armor"
   }

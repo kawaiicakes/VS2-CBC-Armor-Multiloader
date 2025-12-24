@@ -1,7 +1,0 @@
-{
-  "parent": "vscarmor:block/full/basic_colorable_waterline",
-  "textures": {
-    "all": "vscarmor:block/arctic_composite_armor",
-    "waterline": "vscarmor:block/composite_armor"
-  }
-}

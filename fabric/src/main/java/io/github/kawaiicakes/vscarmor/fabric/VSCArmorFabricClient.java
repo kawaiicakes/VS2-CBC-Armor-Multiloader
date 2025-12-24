@@ -21,7 +21,7 @@ public class VSCArmorFabricClient implements ClientModInitializer {
 
                     if (colorableBE == null) return 0xFFFFFF;
 
-                    return i == 0 ? colorableBE.getMainColor() : colorableBE.getWaterlineColor();
+                    return i == 0 ? colorableBE.getMainColor() : colorableBE.getLayerColor((byte) i);
                 },
                 VSCArmorRegistry.blocks()
         );

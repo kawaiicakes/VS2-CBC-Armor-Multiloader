@@ -1,19 +1,11 @@
 {
   "replace": false,
   "values": [
-    "vscarmor:arctic_steel_armor_slab",
-    "vscarmor:gray_polygon_steel_armor",
-    "vscarmor:rainbow_steel_armor_slab",
-    "vscarmor:desert_steel_armor_slab",
-    "vscarmor:steel_armor_slab",
-    "vscarmor:forest_steel_armor_slab",
     "vscarmor:woodland_polygon_steel_armor",
-    "vscarmor:gray_polygon_steel_armor_slab",
+    "vscarmor:gray_polygon_steel_armor",
     "vscarmor:rainbow_steel_armor",
     "vscarmor:steel_armor",
     "vscarmor:desert_steel_armor",
-    "vscarmor:woodland_polygon_steel_armor_slab",
-    "vscarmor:bush_steel_armor_slab",
     "vscarmor:forest_steel_armor",
     "vscarmor:arctic_steel_armor",
     "vscarmor:bush_steel_armor"

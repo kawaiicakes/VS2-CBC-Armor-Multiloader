@@ -1,6 +1,0 @@
-{
-  "parent": "vscarmor:block/universal_slab/basic_colorable_horizontal",
-  "textures": {
-    "all": "vscarmor:block/bush_composite_armor"
-  }
-}
