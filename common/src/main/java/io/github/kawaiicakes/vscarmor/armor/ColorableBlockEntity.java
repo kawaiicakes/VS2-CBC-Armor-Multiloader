@@ -23,14 +23,11 @@ import java.util.List;
 public class ColorableBlockEntity extends BlockEntity {
     protected int mainColor = 0xFFFFFF;
     protected List<Integer> layers;
-    protected ColorableBlock colorableBlock = null;
 
     public ColorableBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(VSCArmorRegistry.colorableBEType(), blockPos, blockState);
 
         if (this.getBlockState().getBlock() instanceof ColorableBlock colorable) {
-            this.colorableBlock = colorable;
-
             if (colorable.getPattern().getLayers() > 0) {
                 this.layers = NonNullList.createWithCapacity(colorable.getPattern().getLayers());
             }

@@ -2,9 +2,11 @@ package io.github.kawaiicakes.vscarmor.fabric;
 
 import io.github.kawaiicakes.vscarmor.VSCArmorRegistry;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlockItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -24,6 +26,14 @@ public class VSCArmorFabricClient implements ClientModInitializer {
                     return i == 0 ? colorableBE.getMainColor() : colorableBE.getLayerColor((byte) i);
                 },
                 VSCArmorRegistry.blocks()
+        );
+
+        ColorProviderRegistry.ITEM.register(
+                (ItemStack itemStack, int i) -> {
+                    if (!(itemStack.getItem() instanceof ColorableBlockItem colorableItem)) return 0xFFFFFF;
+                    return colorableItem.getLayerColor(itemStack, i);
+                },
+                VSCArmorRegistry.items()
         );
     }
 }

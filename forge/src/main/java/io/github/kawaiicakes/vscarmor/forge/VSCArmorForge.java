@@ -1,6 +1,7 @@
 package io.github.kawaiicakes.vscarmor.forge;
 
 import io.github.kawaiicakes.vscarmor.*;
+import io.github.kawaiicakes.vscarmor.armor.ColorableBlockItem;
 import io.github.kawaiicakes.vscarmor.datagen.VSCArmorLangProvider;
 import io.github.kawaiicakes.vscarmor.datagen.ValkyrienSkiesPropertyProvider;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
@@ -123,6 +124,17 @@ public class VSCArmorForge {
                         return i == 0 ? colorableBE.getMainColor() : colorableBE.getLayerColor((byte) i);
                     },
                     VSCArmorRegistry.blocks()
+            );
+        }
+
+        @SubscribeEvent
+        public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
+            event.register(
+                    (ItemStack itemStack, int i) -> {
+                        if (!(itemStack.getItem() instanceof ColorableBlockItem colorableItem)) return 0xFFFFFF;
+                        return colorableItem.getLayerColor(itemStack, i);
+                    },
+                    VSCArmorRegistry.items()
             );
         }
     }

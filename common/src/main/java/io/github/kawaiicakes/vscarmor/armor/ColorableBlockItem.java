@@ -1,7 +1,9 @@
 package io.github.kawaiicakes.vscarmor.armor;
 
+import io.github.kawaiicakes.vscarmor.VSCArmor;
 import io.github.kawaiicakes.vscarmor.VSCArmorExpectPlatform;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,5 +43,15 @@ public class ColorableBlockItem extends BlockItem {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
 
 
+    }
+
+    // TODO (fix when putting layers into one array)
+    public int getLayerColor(ItemStack stack, int layer) {
+        final CompoundTag beData = BlockItem.getBlockEntityData(stack);
+        if (beData == null) return 0xFFFFFF;
+
+        final CompoundTag beTag = beData.getCompound(VSCArmor.MOD_ID);
+        // return beTag.getIntArray("layers")[layer];
+        return beTag.getInt("body");
     }
 }

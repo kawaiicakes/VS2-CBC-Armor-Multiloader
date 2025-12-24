@@ -60,6 +60,19 @@ public class VSCArmorRegistryImpl {
         return ORDERED_BLOCKS.toArray(Block[]::new);
     }
 
+    public static Item[] items() {
+        Item[] toReturn = new Item[VSCArmorRegistry.ORDERED_BLOCK_NAMES.size()];
+
+        int i = 0;
+        for (String item : VSCArmorRegistry.ORDERED_BLOCK_NAMES) {
+            toReturn[i] = RegistryObject.create(new ResourceLocation(VSCArmor.MOD_ID, item), ForgeRegistries.ITEMS)
+                    .get();
+            i++;
+        }
+
+        return toReturn;
+    }
+
     public static void registerBlocksAndItems(Map<String, Supplier<Block>> forRegistration) {
         for (Map.Entry<String, Supplier<Block>> entry : forRegistration.entrySet()) {
             BLOCKS.register(entry.getKey(), entry.getValue());

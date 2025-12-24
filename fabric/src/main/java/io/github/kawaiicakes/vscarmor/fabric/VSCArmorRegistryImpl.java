@@ -19,6 +19,7 @@ import static net.minecraft.core.Registry.*;
 
 public class VSCArmorRegistryImpl {
     public static final List<Block> MOD_BLOCKS = new ArrayList<>();
+    public static final List<Item> MOD_ITEMS = new ArrayList<>();
 
     public static BlockEntityType<ColorableBlockEntity> COLORABLE_BE_TYPE = register(
             BLOCK_ENTITY_TYPE,
@@ -40,13 +41,19 @@ public class VSCArmorRegistryImpl {
         return MOD_BLOCKS.toArray(Block[]::new);
     }
 
+    public static Item[] items() {
+        return MOD_ITEMS.toArray(Item[]::new);
+    }
+
     public static void registerBlocksAndItems(Map<String, Supplier<Block>> forRegistration) {
         for (Map.Entry<String, Supplier<Block>> entry : forRegistration.entrySet()) {
             Block block = entry.getValue().get();
 
             register(BLOCK, entry.getKey(), block);
             MOD_BLOCKS.add(block);
-            register(ITEM, entry.getKey(), new ColorableBlockItem(new Item.Properties(), block));
+            final Item colorableItem = new ColorableBlockItem(new Item.Properties(), block);
+            register(ITEM, entry.getKey(), colorableItem);
+            MOD_ITEMS.add(colorableItem);
         }
     }
 }

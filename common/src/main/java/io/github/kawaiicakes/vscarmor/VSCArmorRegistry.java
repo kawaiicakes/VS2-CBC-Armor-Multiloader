@@ -5,6 +5,7 @@ import io.github.kawaiicakes.vscarmor.block.ArmorBlock;
 import io.github.kawaiicakes.vscarmor.armor.Grade;
 import io.github.kawaiicakes.vscarmor.armor.Pattern;
 import io.github.kawaiicakes.vscarmor.armor.ColorableBlockEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -53,6 +54,11 @@ public class VSCArmorRegistry {
 
     @ExpectPlatform
     public static Block[] blocks() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Item[] items() {
         throw new AssertionError();
     }
 

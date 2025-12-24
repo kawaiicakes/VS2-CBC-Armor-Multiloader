@@ -1,6 +1,5 @@
 package io.github.kawaiicakes.vscarmor.armor;
 
-import io.github.kawaiicakes.vscarmor.VSCArmor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.model.ModelTemplate;
@@ -59,13 +58,6 @@ public interface ColorableBlock extends EntityBlock {
     @Nullable
     default BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         return new ColorableBlockEntity(blockPos, blockState);
-    }
-
-    default ResourceLocation getPatternBaseTexture() {
-        return new ResourceLocation(
-                VSCArmor.MOD_ID,
-                this.getPattern().asPrefix() + this.getGrade().getSerializedName()
-        );
     }
 
     Grade getGrade();
